@@ -29,7 +29,7 @@ const TutorTable = () => {
                             <td className="align-middle">{aluno.info.age}</td>
                             <td className="align-middle">{aluno.info.schoolLocation}</td>
                             <td className="text-end">
-                                <FontAwesomeIcons icon={faEdit} classes={"btn-primary"}/>
+                                <Link to={`/${aluno.id}`}><FontAwesomeIcons icon={faEdit} classes={"btn-primary"}/></Link>
                                 <FontAwesomeIcons icon={faTrashAlt} classes={"btn-danger"} fn={()=>removeStudent(aluno.id)}/>
                             </td>
                         </tr>

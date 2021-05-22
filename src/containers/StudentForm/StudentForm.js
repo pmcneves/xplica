@@ -1,50 +1,29 @@
 import SubmitButton from "../../components/Buttons/SubmitButton";
-// import StudentIdentity from '../../components/StudentInfo/StudentIdentity'
-// import GuardianInfo from "../../components/StudentInfo/GuardianInfo";
-// import SubjectsInfo from "../../components/StudentInfo/SubjectsInfo";
 import { useForm } from "react-hook-form";
 import { ageOptions, grades } from "../../screens/Explicador/utils";
 import { useDispatch } from "react-redux";
+import { addStudent } from "../../screens/Explicador/actions";
+import { v4 as uuidv4 } from 'uuid'
 
 
 
 
-const StudentForm = ({
-    name,
-    age,
-    grade,
-    contact,
-    location,
-    school,
-    guardian,
-    kinship,
-    guardianContact,
-    subject,
-    teacherOfSubject,
-    setName,
-    setAge,
-    setGrade,
-    setContact,
-    setLocation,
-    setSchool,
-    setGuardian,
-    setKinship,
-    setGuardianContact,
-    setSubject,
-    setTeacherOfSubject,
-    // submitForm
-    }) => {
+const StudentForm = () => {
 
     const dispatch = useDispatch()
-
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const submitForm = data => {
-        console.log(data)
-    };
+
+    //add entry study
+    const addEntry = (data) => {
+        dispatch(addStudent({
+            id: uuidv4(),
+            info: data
+        }))
+    }
 
     return (
         <div className="container">
-            <form onSubmit={handleSubmit(submitForm)}>
+            <form onSubmit={handleSubmit(addEntry)}>
                 <div className="row">
                     <div className="col-md-6">
                         <label htmlFor="name">Nome</label>
@@ -65,7 +44,7 @@ const StudentForm = ({
                         <label htmlFor="grade">Ano</label>
                         <select 
                             className="form-select"
-                            {...register("gradeSelect")}>
+                            {...register("grade")}>
                                 {grades.map(grade => <option key={grade} value={grade}>{grade}</option>)}
                                 <option>Universidade</option>
                         </select>
@@ -141,12 +120,12 @@ const StudentForm = ({
                                 {...register("subject")}/>
                         </div>
                         <div className="col-md-3">
-                            <label htmlFor="teacher">Professor(a)</label>
+                            <label htmlFor="teacherOfSubject">Professor(a)</label>
                             <input 
                                 type="text" 
                                 className="form-control" 
                                 placeholder="Nome"
-                                {...register("teacher")}/>
+                                {...register("teacherOfSubject")}/>
                         </div>                    
                     </div>
                 </div>
