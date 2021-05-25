@@ -1,3 +1,21 @@
-.lol {
-    z-index: 1
+.cursor {
+    cursor: pointer
+}
+
+.table-align-right {
+    td {
+        :last-child {
+            text-align: right
+
+        }
+    }
+}
+
+.icons {
+    height: 45px;
+    width: 45px
+}
+
+.icon {
+    margin-left: 5px;
 }

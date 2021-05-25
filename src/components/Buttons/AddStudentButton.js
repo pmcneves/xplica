@@ -1,3 +1,4 @@
+import './styles.scss'
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons"
 import FontAwesomeIcons from "./FontAwesomeIcons"
 import { Link } from "react-router-dom"
