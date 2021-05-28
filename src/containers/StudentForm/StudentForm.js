@@ -1,37 +1,41 @@
 import SubmitButton from "../../components/Buttons/SubmitButton";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import { addStudent } from "../../screens/Explicador/actions";
-import { v4 as uuidv4 } from 'uuid'
 import StudentIdentity from "../../components/StudentInfo/StudentIdentity";
 import GuardianInfo from "../../components/StudentInfo/GuardianInfo";
 import SubjectsInfo from "../../components/StudentInfo/SubjectsInfo";
+import { useEffect, useState } from "react";
 
 
 
-
-const StudentForm = () => {
-
-    const dispatch = useDispatch()
+const StudentForm = ({addEntry, setNumberOfSubjects}) => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const [subjectCount, setSubjectCount] = useState([0])
 
-    //add entry study
-    const addEntry = (data) => {
-        dispatch(addStudent({
-            id: uuidv4(),
-            info: data
-        }))
+    useEffect(() => {
+        setNumberOfSubjects(subjectCount.length)
+    }, [subjectCount])
+
+
+    const addSubject = () => {
+        const lastItem = subjectCount[subjectCount.length - 1]
+        const newItem = lastItem + 1
+        setSubjectCount(prevArray => [...prevArray, newItem])
+    }
+
+    const removeSubject = (id) => {
+        const removeSubject = subjectCount.filter(subjectId => subjectId !== id)
+        setSubjectCount(removeSubject)
     }
 
     return (
-        <div className="container">
-            <form onSubmit={handleSubmit(addEntry)}>
-                <StudentIdentity register={register}/>
-                <GuardianInfo register={register}/>
-                <SubjectsInfo register={register}/>
-                <SubmitButton>Adicionar</SubmitButton> 
-            </form>
-        </div>
+        <form onSubmit={handleSubmit(addEntry)}>
+            <StudentIdentity register={register}/>
+            <GuardianInfo register={register}/>
+            <h4>Explicações</h4>
+            {subjectCount.map(value => <SubjectsInfo register={register} key={value} id={value} removeSubject={removeSubject}/>)}
+            <button type="button" onClick={()=>addSubject()}>add</button>
+            <SubmitButton>Adicionar</SubmitButton> 
+        </form>
 
     )
 }

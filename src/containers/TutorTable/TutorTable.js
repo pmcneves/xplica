@@ -1,6 +1,6 @@
 import './styles.scss'
 import { useDispatch, useSelector } from "react-redux"
-import { faInfo, faTrashAlt } from "@fortawesome/free-solid-svg-icons"
+import { faEye, faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons"
 import FontAwesomeIcons from "../../components/Buttons/FontAwesomeIcons"
 import {removeStudentFromStore} from '../../screens/Explicador/actions'
 import { useHistory } from "react-router-dom"
@@ -29,7 +29,7 @@ const TutorTable = () => {
           },
           {
             Header: 'Disciplina(s)',
-            accessor: 'info.subject',
+            accessor: 'info.subject_0',
           },
           {
             Header: 'Contacto',
@@ -49,8 +49,9 @@ const TutorTable = () => {
             Cell: ({row}) => {
                 return (
                     <div>
-                        <FontAwesomeIcons classes={'btn-primary icons'} icon={faInfo} fn={() => handleRowClick(row.original.id)}/>
-                        <FontAwesomeIcons classes={'btn-danger fa-lg icons icon'} icon={faTrashAlt} fn={(e)=>removeStudent(e, row.original.id)}/>
+                        <FontAwesomeIcons variant={'primary'} classes={"icons"} icon={faEye} fn={() => handleRowClick(row.original.id)}/>
+                        <FontAwesomeIcons variant={'secondary'} classes={"icons icon"} icon={faEdit} fn={(e)=>removeStudent(e, row.original.id)}/>
+                        <FontAwesomeIcons variant={'danger'} classes={"icons icon"} icon={faTrashAlt} fn={(e)=>removeStudent(e, row.original.id)}/>
                     </div>)}
           }
         ],
@@ -73,7 +74,7 @@ const TutorTable = () => {
     }
 
     const handleRowClick = (id) => {
-        history.push(`/student/${id}`)
+        history.push(`/alun@/${id}`)
     }
 
     return (

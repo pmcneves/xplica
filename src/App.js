@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import { Provider } from 'react-redux';
 import AppRouter from './routes'
 import configureStore from './store/configureStore';
@@ -8,11 +9,11 @@ import { loadStudentsFromDb } from './screens/Explicador/actions';
 
 const store = configureStore();
 
-const lol = async () => {
-  const loleca = await fetchStudentsFromDb()
-  store.dispatch(loadStudentsFromDb(loleca))
+const fetchStudents = async () => {
+  const students = await fetchStudentsFromDb()
+  store.dispatch(loadStudentsFromDb(students))
 }
-lol()
+fetchStudents()
 
 const Xplica = () => {
   return (

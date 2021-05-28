@@ -6,15 +6,17 @@
     td {
         :last-child {
             text-align: right
-
         }
     }
 }
 
 .icons {
     height: 45px;
-    width: 45px
+    width: 45px;
+    text-align: center !important
 }
+
+
 
 .icon {
     margin-left: 5px;
