@@ -17,27 +17,27 @@ const TutorTable = () => {
         () => [
           {
             Header: 'Nome',
-            accessor: 'info.name',
+            accessor: 'info.student.name',
           },
           {
             Header: 'Escola',
-            accessor: 'info.school',
+            accessor: 'info.student.school',
           },
           {
             Header: 'Ano',
-            accessor: 'info.grade',
+            accessor: 'info.student.grade',
           },
           {
             Header: 'Disciplina(s)',
-            accessor: 'info.subject_0',
+            accessor: 'info.subject',
           },
           {
             Header: 'Contacto',
-            accessor: 'info.contact',
+            accessor: 'info.student.contact',
           },
           {
             Header: 'Contacto EE',
-            accessor: 'info.guardianContact',
+            accessor: 'info.guardian.guardianContact',
           },
           {
             Header: 'Presencial/Online',

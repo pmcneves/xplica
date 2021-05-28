@@ -11,7 +11,7 @@ const GuardianInfo = ({register}) => (
                     type="text" 
                     className="form-control" 
                     placeholder="Nome"
-                    {...register("guardianFirstName")}/>
+                    {...register("guardian.name.guardianFirstName")}/>
             </div>
             <div className="col-md-3">
                 <label htmlFor="guardianLastName">Apelido</label>
@@ -19,7 +19,7 @@ const GuardianInfo = ({register}) => (
                     type="text" 
                     className="form-control" 
                     placeholder="Apelido"
-                    {...register("guardianLastName")}/>
+                    {...register("guardian.name.guardianLastName")}/>
             </div>
             <div className="col-md-3">
                 <label htmlFor="kinship">Grau de parentesco</label>
@@ -27,7 +27,7 @@ const GuardianInfo = ({register}) => (
                     type="text" 
                     className="form-control" 
                     placeholder="Grau"
-                    {...register("kinship")}/>
+                    {...register("guardian.kinship")}/>
             </div>
             <div className="col-md-3">
                 <label htmlFor="guardianContact">Telemóvel</label>
@@ -35,7 +35,7 @@ const GuardianInfo = ({register}) => (
                     type="text" 
                     className="form-control" 
                     placeholder="Contacto"
-                    {...register("guardianContact")}/>
+                    {...register("guardian.guardianContact")}/>
             </div>
         </div>
         <div className="row">
@@ -45,7 +45,7 @@ const GuardianInfo = ({register}) => (
                     type="text" 
                     className="form-control" 
                     placeholder="E-mail"
-                    {...register("guardianEmail")}/>
+                    {...register("guardian.guardianEmail")}/>
             </div>
             <div className="col-md-9">
                 <label htmlFor="guardianObservations">Observações</label>
@@ -53,7 +53,7 @@ const GuardianInfo = ({register}) => (
                     type="text" 
                     className="form-control" 
                     placeholder="Observações"
-                    {...register("guardianObservations")}/>
+                    {...register("guardian.guardianObservations")}/>
             </div>
         </div>
     </div>

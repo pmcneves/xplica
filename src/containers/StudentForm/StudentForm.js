@@ -3,18 +3,13 @@ import { useForm } from "react-hook-form";
 import StudentIdentity from "../../components/StudentInfo/StudentIdentity";
 import GuardianInfo from "../../components/StudentInfo/GuardianInfo";
 import SubjectsInfo from "../../components/StudentInfo/SubjectsInfo";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 
 
-const StudentForm = ({addEntry, setNumberOfSubjects}) => {
+const StudentForm = ({addEntry}) => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const [subjectCount, setSubjectCount] = useState([0])
-
-    useEffect(() => {
-        setNumberOfSubjects(subjectCount.length)
-    }, [subjectCount])
-
 
     const addSubject = () => {
         const lastItem = subjectCount[subjectCount.length - 1]

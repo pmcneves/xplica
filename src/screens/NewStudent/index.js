@@ -10,10 +10,6 @@ const NewStudent = () => {
 
     const dispatch = useDispatch()
 
-    //get subjects
-    // const [subjects, setSubjects] = useState([''])
-    const [numberOfSubjects, setNumberOfSubjects] = useState(0)
-
     //add student to db
     const addEntry = (data) => {
 
@@ -21,19 +17,21 @@ const NewStudent = () => {
             id: uuidv4(),
             info: {
                 ...data,
-                // firstName: null,
-                // lastName: null,
-                guardianFirstName: null,
-                guardianLastName: null,
-                name: `${data.name.firstName} ${data.name.lastName}`,
-                guardianName: `${data.guardianFirstName} ${data.guardianLastName}`
+                student: {
+                    ...data.student,
+                    name: `${data.student.name.firstName} ${data.student.name.lastName}`,
+                },
+                guardian: {
+                    ...data.guardian,
+                    name: `${data.guardian.name.guardianFirstName} ${data.guardian.name.guardianLastName}`
+                }
             }
         }))
     }
 
     return (
         <Container>
-            <StudentForm addEntry={addEntry} setNumberOfSubjects={setNumberOfSubjects} />
+            <StudentForm addEntry={addEntry}/>
         </Container>
     )
 }
