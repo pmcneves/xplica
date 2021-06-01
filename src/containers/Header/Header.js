@@ -21,9 +21,11 @@ const Header = () => {
                             <LinkContainer to="/adicionaralun@">
                                 <Nav.Link> Adicionar alun@ </Nav.Link>
                             </LinkContainer>
-                            {/* <Nav.Link> */}
-                                <button>Logout</button>
-                            {/* </Nav.Link> */}
+                            <NavDropdown title={<FontAwesomeIcons icon={faCog} classes={"btn-cog"}/>} id="basic-nav-dropdown">
+                                <NavDropdown.Item href="#action/3.3">Perfil</NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item href="#action/3.4">Terminar sessão</NavDropdown.Item>
+                            </NavDropdown>
                         </ul>
                         
                         

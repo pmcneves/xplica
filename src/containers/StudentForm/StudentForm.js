@@ -11,6 +11,8 @@ const StudentForm = ({addEntry}) => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const [subjectCount, setSubjectCount] = useState([0])
 
+    
+    //add and remove subjects
     const addSubject = () => {
         const lastItem = subjectCount[subjectCount.length - 1]
         const newItem = lastItem + 1

@@ -2,19 +2,18 @@ import { applyMiddleware, combineReducers, createStore } from "redux"
 import { composeWithDevTools } from "redux-devtools-extension"
 import explicandosReducer from '../screens/Explicador/reducers'
 import createSagaMiddleware from 'redux-saga'
-import { initSagas } from "./initSagas"
+import sagas from './sagas'
 
 const sagaMiddleware = createSagaMiddleware()
-const middlewares = [sagaMiddleware]
 
 const configureStore = () => {
     const store = createStore(
         combineReducers({
             explicandos: explicandosReducer
         }),
-        composeWithDevTools(applyMiddleware(...middlewares))
+        composeWithDevTools(applyMiddleware(sagaMiddleware))
     );
-    initSagas(sagaMiddleware)
+    sagaMiddleware.run(sagas)
     return store
 }
 

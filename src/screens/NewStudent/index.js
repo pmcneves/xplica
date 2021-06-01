@@ -12,7 +12,6 @@ const NewStudent = () => {
 
     //add student to db
     const addEntry = (data) => {
-
         dispatch(addStudent({
             id: uuidv4(),
             info: {

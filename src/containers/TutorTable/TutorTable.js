@@ -12,6 +12,7 @@ const TutorTable = () => {
     const explicandos = useSelector(state => state.explicandos)
     const dispatch = useDispatch()
     const history = useHistory();
+    console.log(explicandos)
 
     const columns = useMemo(
         () => [
@@ -29,7 +30,7 @@ const TutorTable = () => {
           },
           {
             Header: 'Disciplina(s)',
-            accessor: 'info.subject',
+            accessor: d => d.info.subjects.map((classes,i) => <p key={i}>{classes.subject}</p>),
           },
           {
             Header: 'Contacto',
@@ -46,6 +47,7 @@ const TutorTable = () => {
           {
             Header: '',
             accessor: 'actions',
+            width:500,
             Cell: ({row}) => {
                 return (
                     <div>

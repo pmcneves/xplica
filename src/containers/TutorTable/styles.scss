@@ -2,21 +2,14 @@
     cursor: pointer
 }
 
-.table-align-right {
-    td {
-        :last-child {
-            text-align: right
-        }
-    }
+p {
+    margin-bottom: 0
 }
 
 .icons {
     height: 45px;
     width: 45px;
-    text-align: center !important
 }
-
-
 
 .icon {
     margin-left: 5px;
