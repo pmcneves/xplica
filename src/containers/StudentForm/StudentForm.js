@@ -8,7 +8,7 @@ import { useState } from "react";
 
 
 const StudentForm = ({addEntry}) => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, unregister, formState: { errors } } = useForm();
     const [subjectCount, setSubjectCount] = useState([0])
 
     
@@ -22,6 +22,7 @@ const StudentForm = ({addEntry}) => {
     const removeSubject = (id) => {
         const removeSubject = subjectCount.filter(subjectId => subjectId !== id)
         setSubjectCount(removeSubject)
+        unregister(`subjects.${id}`)
     }
 
     return (

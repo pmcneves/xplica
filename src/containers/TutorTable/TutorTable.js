@@ -12,7 +12,6 @@ const TutorTable = () => {
     const explicandos = useSelector(state => state.explicandos)
     const dispatch = useDispatch()
     const history = useHistory();
-    console.log(explicandos)
 
     const columns = useMemo(
         () => [

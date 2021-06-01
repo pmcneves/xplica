@@ -19,6 +19,20 @@ const AppRouter = () => {
                 <Route path="/alun@/:id" component={Student}/>
                 <Route component={Error}/>
             </Switch>
+            {/* <Route render={({location})=>(
+                <TransitionGroup>
+                    <CSSTransition timeout={300} className="fade" key={location.key}>
+                        <Switch location={location}>
+                            <Route path="/alun@s" component={ExplicadorMenu}/>
+                            <Route path="/adicionaralun@" component={NewStudent}/>
+                            <Route path="/alun@/:id" component={Student}/>
+                            <Route component={Error}/>
+                        </Switch>
+                    </CSSTransition>
+                </TransitionGroup>
+            )}/> */}
+            
+            
         </BrowserRouter>
     )
 }
