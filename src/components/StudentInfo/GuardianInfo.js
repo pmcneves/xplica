@@ -1,9 +1,11 @@
+import Title from "./Title"
+
 const GuardianInfo = ({register}) => (
     <div>
-        <h4>
+        <Title>
             Encarregado de Educação
             <small className="text-muted"> (se aplicável)</small>
-        </h4>
+        </Title>
         <div className="row">
             <div className="col-md-3">
                 <label htmlFor="guardianFirstName">Nome</label>

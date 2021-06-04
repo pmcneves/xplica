@@ -3,9 +3,17 @@ import FontAwesomeIcons from '../../components/Buttons/FontAwesomeIcons'
 import { faCog } from '@fortawesome/free-solid-svg-icons'
 import { Nav, Navbar, NavbarBrand, NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
+import { useDispatch } from 'react-redux'
+import { loggingOutFromStore } from '../../screens/Login/actions'
 
 
 const Header = () => {
+    const dispatch = useDispatch()
+
+    const logout = () => {
+        dispatch(loggingOutFromStore())
+    }
+
     return (
         <header>
             <Navbar bg="dark" variant="dark">
@@ -24,7 +32,7 @@ const Header = () => {
                             <NavDropdown title={<FontAwesomeIcons icon={faCog} classes={"btn-cog"}/>} id="basic-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.3">Perfil</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.4">Terminar sessão</NavDropdown.Item>
+                                <NavDropdown.Item onClick={logout}>Terminar sessão</NavDropdown.Item>
                             </NavDropdown>
                         </ul>
                         

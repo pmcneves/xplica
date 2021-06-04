@@ -1,7 +1,7 @@
 const Error = () => {
     return (
         <div>
-            error
+            Oopps! Página errada.
         </div>
     )
 }

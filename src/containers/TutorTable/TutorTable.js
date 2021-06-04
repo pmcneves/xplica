@@ -29,24 +29,20 @@ const TutorTable = () => {
           },
           {
             Header: 'Disciplina(s)',
-            accessor: d => d.info.subjects.map((classes,i) => <p key={i}>{classes.subject}</p>),
+            accessor: d => d.info.tutoring.subjects.map((classes,i) => <p key={i}>{classes.subject}</p>),
           },
           {
             Header: 'Contacto',
             accessor: 'info.student.contact',
           },
           {
-            Header: 'Contacto EE',
-            accessor: 'info.guardian.guardianContact',
-          },
-          {
-            Header: 'Presencial/Online',
-            accessor: '',
+            Header: 'Regime',
+            accessor: d => d.info.tutoring.attendance,
           },
           {
             Header: '',
             accessor: 'actions',
-            width:500,
+            width: 150,
             Cell: ({row}) => {
                 return (
                     <div>
@@ -84,9 +80,9 @@ const TutorTable = () => {
                 <table {...getTableProps()} className="table table-hover table-striped table-align-right">
                 <thead>
                 {headerGroups.map(headerGroup => (
-                    <tr {...headerGroup.getHeaderGroupProps()}>
+                    <tr {...headerGroup.getHeaderGroupProps()} className="table-header">
                         {headerGroup.headers.map(column => (
-                            <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                            <th {...column.getHeaderProps(column.getSortByToggleProps())} >
                                 {column.render('Header')}
                             </th>
                         ))}
@@ -100,7 +96,9 @@ const TutorTable = () => {
                             <tr {...row.getRowProps()} onClick={()=>handleRowClick(row.original.id)} className="align-middle cursor">
                                 {row.cells.map(cell => {
                                     return (
-                                        <td {...cell.getCellProps()}>
+                                        <td {...cell.getCellProps({
+                                            style: {width: cell.column.width }
+                                        })}>
                                             {cell.render('Cell')}
                                         </td>
                                     )
@@ -113,7 +111,6 @@ const TutorTable = () => {
             ) : (
                 <div>Loader</div>
             )}
-            
         </div>
     )
 }

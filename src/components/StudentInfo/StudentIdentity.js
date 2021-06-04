@@ -1,8 +1,9 @@
 import { ageOptions, gradesArr } from "../../screens/Explicador/utils"
+import Title from "./Title"
 
 const StudentIdentity = ({register}) => (
     <div>
-        <h4>Dados do Aluno</h4>
+        <Title>Dados do Aluno</Title>
         <div className="row">
             <div className="col-md-3">
                 <label htmlFor="firstName">Nome Próprio</label>
@@ -37,20 +38,20 @@ const StudentIdentity = ({register}) => (
         </div>
         <div className="row">
             <div className="col-md-3">
-                <label htmlFor="contact">Telemóvel</label>
-                <input
-                    type="text"  
-                    className="form-control" 
-                    placeholder="Contacto"
-                    {...register("student.contact")}/>
-            </div>
-            <div className="col-md-3">
                 <label htmlFor="location">Concelho (Habitação)</label>
                 <input 
                     type="text" 
                     className="form-control" 
                     placeholder="Concelho"
                     {...register("student.location")}/>
+            </div>
+            <div className="col-md-3">
+                <label htmlFor="contact">Telemóvel</label>
+                <input
+                    type="text"  
+                    className="form-control" 
+                    placeholder="Contacto"
+                    {...register("student.contact")}/>
             </div>
             <div className="col-md-3">
                 <label htmlFor="email">E-mail</label>

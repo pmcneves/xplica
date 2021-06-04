@@ -1,8 +1,10 @@
 import { all } from 'redux-saga/effects'
-import sagasExplicador from '../screens/Explicador/sagas';
+import studentSagas from '../screens/Explicador/sagas'
+import authSagas from '../screens/Login/sagas'
 
-export default function* () {
+export default function* sagas () {
     yield all(
-        [sagasExplicador()]
+        [studentSagas(),
+        authSagas()]
     )
 }

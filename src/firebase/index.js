@@ -1,5 +1,6 @@
 import firebase from 'firebase/app'
 import 'firebase/database'
+import 'firebase/auth'
 
 const firebaseConfig = {
   apiKey: "AIzaSyB0hQrRpj8qbgb6mkLbDStRxdwOjUhHpd8",
@@ -13,6 +14,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 
 const database = firebase.database()
+const auth = firebase.auth()
 
 export const addStudentToDb = async (student) => await database.ref(`/students/${student.id}`).set(student.info);
 
@@ -29,3 +31,9 @@ export const fetchStudentsFromDb = async () => await database
     return students
   })
 
+export const logInToApp = async (data) => await auth
+  .signInWithEmailAndPassword(data.email, data.password)
+  .then(user => user)
+  .catch(err => err)
+
+export const logOutFromApp = async () => await auth.signOut()

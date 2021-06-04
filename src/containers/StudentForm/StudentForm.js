@@ -4,11 +4,13 @@ import StudentIdentity from "../../components/StudentInfo/StudentIdentity";
 import GuardianInfo from "../../components/StudentInfo/GuardianInfo";
 import SubjectsInfo from "../../components/StudentInfo/SubjectsInfo";
 import { useState } from "react";
+import Title from "../../components/StudentInfo/Title";
+import Subjects from "../../components/StudentInfo/Subjects";
 
 
 
 const StudentForm = ({addEntry}) => {
-    const { register, handleSubmit, unregister, formState: { errors } } = useForm();
+    const { register, handleSubmit, unregister } = useForm();
     const [subjectCount, setSubjectCount] = useState([0])
 
     
@@ -29,8 +31,9 @@ const StudentForm = ({addEntry}) => {
         <form onSubmit={handleSubmit(addEntry)}>
             <StudentIdentity register={register}/>
             <GuardianInfo register={register}/>
-            <h4>Explicações</h4>
-            {subjectCount.map(value => <SubjectsInfo register={register} key={value} id={value} removeSubject={removeSubject}/>)}
+            <Title>Explicações</Title>
+            <SubjectsInfo register={register}/>
+            {subjectCount.map(value => <Subjects register={register} key={value} id={value} removeSubject={removeSubject}/>)}
             <button type="button" onClick={()=>addSubject()}>add</button>
             <SubmitButton>Adicionar</SubmitButton> 
         </form>

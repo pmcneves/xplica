@@ -1,9 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+import './styles.scss'
 import { Provider } from 'react-redux';
 import AppRouter from './routes'
 import configureStore from './store/configureStore';
-import { fetchStudentsFromDb } from './firebase';
+import { fetchStudentsFromDb, logInToApp } from './firebase';
 import { loadStudentsFromDb } from './screens/Explicador/actions';
 
 
@@ -14,6 +15,7 @@ const fetchStudents = async () => {
   store.dispatch(loadStudentsFromDb(students))
 }
 fetchStudents()
+
 
 const Xplica = () => {
   return (
