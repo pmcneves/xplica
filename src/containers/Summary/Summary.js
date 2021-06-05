@@ -14,6 +14,7 @@ const Summary = () => {
         } else {
             presencial += 1
         }
+        return online && presencial
     })
 
     return (

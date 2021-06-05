@@ -1,5 +1,5 @@
 import {put, call, takeLatest} from '@redux-saga/core/effects'
-import { logInToApp, logOutFromApp } from '../../firebase'
+import { logOutFromApp } from '../../firebase'
 import typesAuth from './actions'
 
 

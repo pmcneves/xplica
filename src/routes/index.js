@@ -5,7 +5,6 @@ import NewStudent from '../screens/NewStudent';
 import Student from '../screens/Student';
 import Error from '../screens/Error'
 import Login from '../screens/Login'
-import { useSelector } from 'react-redux';
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute'
 
@@ -13,8 +12,6 @@ import PrivateRoute from './PrivateRoute'
 export const history = createBrowserHistory();
 
 const AppRouter = () => {
-    const auth = useSelector(state => state.auth)
-
     return (
         <BrowserRouter>
             <Switch>

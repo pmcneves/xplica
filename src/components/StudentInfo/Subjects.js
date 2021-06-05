@@ -22,10 +22,12 @@ const Subjects = ({register, id, removeSubject}) => {
                     placeholder="Nome"
                     {...register(`tutoring.subjects.${id}.teacherOfSubject`)}/>
             </div>
-            <div className="col-md-1 deletesubject">
-                <FontAwesomeIcons icon={faTimes} fn={()=>removeSubject(id)} variant={"danger"}/>
-        </div>
-    </Row>
+            {id !== 0 && (
+                <div className="col-md-1 deletesubject">
+                    <FontAwesomeIcons icon={faTimes} fn={()=>removeSubject(id)} variant={"danger"}/>
+                </div>
+            )}
+        </Row>
     )
 }
 

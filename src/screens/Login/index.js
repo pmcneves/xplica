@@ -1,21 +1,26 @@
 import { Col, Container, Form, Row } from 'react-bootstrap'
 import './styles.scss'
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { loggingInToStore } from './actions';
 import { logInToApp } from '../../firebase';
-import { useHistory } from 'react-router';
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
 
 const Login = () => {
     const { register, handleSubmit } = useForm()
     const dispatch = useDispatch()
-    const history = useHistory();
-    const auth = useSelector(state => state.auth) 
+    const [passwordVisibility, setPasswordVisibility] = useState(false)
 
     const logInFormSubmit = async (data) => await logInToApp(data)
+
+    const passwordVisibilityHandler = () => setPasswordVisibility(!passwordVisibility)
+    const textType = passwordVisibility ? 'text' : 'password'
+    const faIcon = passwordVisibility ? <FontAwesomeIcon icon={faEyeSlash}/> : <FontAwesomeIcon icon={faEye}/>
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged(user => {
@@ -23,11 +28,10 @@ const Login = () => {
                 dispatch(loggingInToStore(user.uid))
                 console.log('logged in')
             } else {
-                console.log('logged out')
+                // console.log('logged out')
             }
-          });
-    }, [])
-
+          })
+    })
 
     return (
         <div className="login__background">
@@ -42,13 +46,16 @@ const Login = () => {
                                 <Form.Label className="login__label">Email</Form.Label>
                                 <Form.Control placeholder="Email" {...register(`email`, { required: true })}/>
                             </Form.Group>
-                            <Form.Group className="mt-3">
+                            <Form.Group className="mt-3 login__password">
                                 <Form.Label className="login__label">Password</Form.Label>
-                                <Form.Control placeholder="Password" {...register(`password`, { required: true })}/>
+                                <Form.Control type={textType} placeholder="Password" {...register(`password`, { required: true })}/>
+                                <div onClick={passwordVisibilityHandler} className="login__password-icon">
+                                    {faIcon}
+                                </div>
                             </Form.Group>
                             <div className="text-center mb-3">
-                                <button 
-                                    type="submit" 
+                                <button
+                                    type="submit"
                                     className="login__submitBtn mt-3">
                                         Conectar
                                 </button>

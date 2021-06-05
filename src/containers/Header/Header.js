@@ -19,7 +19,7 @@ const Header = () => {
             <Navbar bg="dark" variant="dark">
                 <div className="container">
                     <NavbarBrand>
-                        <h2>Xplica</h2>
+                        <h2 className="navbar__logo">Xplica</h2>
                     </NavbarBrand>
                     <div>
                         <ul className="navbar-nav">
@@ -41,9 +41,6 @@ const Header = () => {
                     </div>
                 </div>
             </Navbar>
-            {/* <nav className="navbar navbar-dark bg-dark">
-                
-            </nav> */}
         </header>
     )
 }

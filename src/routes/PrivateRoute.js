@@ -4,7 +4,6 @@ import Header from '../containers/Header/Header'
 
 const PrivateRoute = ({component: Component, ...rest}) => {
     const auth = useSelector(state => state.auth)
-    console.log(!!auth.uid)
     return (
         <Route {...rest} component={props => (
             !!auth.uid ? (

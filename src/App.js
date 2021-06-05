@@ -4,7 +4,7 @@ import './styles.scss'
 import { Provider } from 'react-redux';
 import AppRouter from './routes'
 import configureStore from './store/configureStore';
-import { fetchStudentsFromDb, logInToApp } from './firebase';
+import { fetchStudentsFromDb } from './firebase';
 import { loadStudentsFromDb } from './screens/Explicador/actions';
 
 
