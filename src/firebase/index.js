@@ -34,6 +34,8 @@ export const fetchStudentsFromDb = async () => await database
 export const logInToApp = async (data) => await auth
   .signInWithEmailAndPassword(data.email, data.password)
   .then(user => user)
-  .catch(err => err)
+  .catch(err => {
+    throw err
+  })
 
 export const logOutFromApp = async () => await auth.signOut()

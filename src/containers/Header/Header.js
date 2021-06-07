@@ -10,9 +10,7 @@ import { loggingOutFromStore } from '../../screens/Login/actions'
 const Header = () => {
     const dispatch = useDispatch()
 
-    const logout = () => {
-        dispatch(loggingOutFromStore())
-    }
+    const logout = () => dispatch(loggingOutFromStore())
 
     return (
         <header>
