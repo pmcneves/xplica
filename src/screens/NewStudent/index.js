@@ -1,10 +1,9 @@
 import { Container } from 'react-bootstrap'
 import StudentForm from "../../containers/StudentForm/StudentForm"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addStudent } from "../../screens/Explicador/actions";
 import { v4 as uuidv4 } from 'uuid'
 import { useHistory } from 'react-router';
-
 
 const NewStudent = () => {
     const dispatch = useDispatch()

@@ -15,7 +15,7 @@ const AppRouter = () => {
     return (
         <BrowserRouter>
             <Switch>
-                <PublicRoute path="/" exact component={Login}/> 
+                <PublicRoute path="/login" exact component={Login}/> 
                 <PrivateRoute path="/alun@s" component={ExplicadorMenu}/>
                 <PrivateRoute path="/adicionaralun@" component={NewStudent}/>
                 <PrivateRoute path="/alun@/:id" component={Student}/>

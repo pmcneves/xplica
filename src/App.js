@@ -9,6 +9,7 @@ import { fetchStudentsFromDb } from './firebase';
 import { loadStudentsFromDb } from './screens/Explicador/actions';
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import { useEffect } from 'react';
 
 
 const store = configureStore();
@@ -19,14 +20,14 @@ const fetchStudents = async () => {
 }
 fetchStudents()
 
-// firebase.auth().onAuthStateChanged(user => {
-//     if (user) {
-//         store.dispatch(loggingInToStore(user.uid))
-//     } 
-//   })
-
+firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+        store.dispatch(loggingInToStore(user.uid))
+    } 
+  })
 
 const Xplica = () => {
+
   return (
     <Provider store={store}>
       <AppRouter />
