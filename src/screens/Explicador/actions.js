@@ -1,24 +1,32 @@
 const types = {
-    ADD_STUDENT: 'ADD_STUDENT',
-    ADD_STUDENT_TO_STORE: 'ADD_STUDENT_TO_STORE',
+    GET_STUDENTS: 'GET_STUDENTS',
+    SET_STUDENTS: 'SET_STUDENTS',
+    SUBMIT_STUDENT: 'SUBMIT_STUDENT',
     REMOVE_STUDENT: 'REMOVE_STUDENT',
-    REMOVE_STUDENT_FROM_STORE:'REMOVE_STUDENT_FROM_STORE',
-    LOAD_STUDENTS:'LOAD_STUDENTS',
-    LOAD_STUDENTS_FROM_DB:'LOAD_STUDENTS_FROM_DB',
+    ADD_STUDENT: 'ADD_STUDENT',
 }
 export default types
 
-export const removeStudentFromStore = (id) => ({
-    type: types.REMOVE_STUDENT,
-    id
+export const getStudents = () => ({ 
+    type: types.GET_STUDENTS,
 })
 
-export const loadStudentsFromDb = (students) => ({
-    type: types.LOAD_STUDENTS,
-    students
+export const setStudents = (students) => ({
+    type: types.SET_STUDENTS,
+    students,
 })
 
-export const addStudent = (student={}) => ({
+export const submitStudent = (data) => ({
+    type: types.SUBMIT_STUDENT,
+    data,
+})
+
+export const addStudent = (data) => ({
     type: types.ADD_STUDENT,
-    student
+    data
+})
+
+export const removeStudent = (id) => ({
+    type: types.REMOVE_STUDENT,
+    id,
 })

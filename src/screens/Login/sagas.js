@@ -3,10 +3,15 @@ import { logInToApp, logOutFromApp } from '../../firebase'
 import typesAuth from './actions'
 
 
+const getUid = (uid) => localStorage.setItem('uid', uid)
+const eraseUid = () => localStorage.clear()
+
 function* logIn({data}) {
     try {
         const info = yield call(logInToApp, data)
-        yield put({type: typesAuth.LOG_IN_TO_STORE, info})
+        const uid = info.user.uid
+        yield put({type: typesAuth.LOG_IN_TO_STORE, uid})
+        yield call(getUid, uid)
     }
     catch(error) {
         yield put({type:typesAuth.ERROR, error})
@@ -16,6 +21,7 @@ function* logIn({data}) {
 function* logOut() {
     yield call(logOutFromApp)
     yield put({type: typesAuth.LOG_OUT_FROM_STORE})
+    yield call(eraseUid)
 }
 
 export default function* authSagas() {

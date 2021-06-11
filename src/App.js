@@ -4,30 +4,16 @@ import './styles.scss'
 import { Provider } from 'react-redux';
 import AppRouter from './routes'
 import configureStore from './store/configureStore';
-import { loggingInToStore } from './screens/Login/actions';
-import { fetchStudentsFromDb } from './firebase';
-import { loadStudentsFromDb } from './screens/Explicador/actions';
-import firebase from 'firebase/app'
-import 'firebase/auth'
-import { useEffect } from 'react';
-
+import { setUserUid } from './screens/Login/actions';
 
 const store = configureStore();
+const uid = localStorage.getItem('uid')
 
-const fetchStudents = async () => {
-  const students = await fetchStudentsFromDb()
-  store.dispatch(loadStudentsFromDb(students))
+if (uid) {
+  store.dispatch(setUserUid(uid))
 }
-fetchStudents()
-
-firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-        store.dispatch(loggingInToStore(user.uid))
-    } 
-  })
 
 const Xplica = () => {
-
   return (
     <Provider store={store}>
       <AppRouter />

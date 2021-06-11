@@ -14,6 +14,11 @@ export const loggingInToStore = (data) => ({
     data
 })
 
+export const setUserUid = (uid) => ({
+    type: typesAuth.LOG_IN_TO_STORE,
+    uid
+})
+
 export const loggingOutFromStore = () => ({
     type: typesAuth.LOG_OUT
 })

@@ -6,7 +6,7 @@ import SubjectsInfo from "../../components/StudentInfo/SubjectsInfo";
 import { useState } from "react";
 import Title from "../../components/StudentInfo/Title";
 import Subjects from "../../components/StudentInfo/Subjects";
-
+import { Row } from "react-bootstrap";
 
 
 const StudentForm = ({addEntry}) => {
@@ -29,13 +29,18 @@ const StudentForm = ({addEntry}) => {
 
     return (
         <form onSubmit={handleSubmit(addEntry)}>
+            <Row>
+                <div className="d-flex justify-content-between">
+                    <Title>Dados do Aluno</Title>
+                    <SubmitButton>Adicionar</SubmitButton> 
+                </div>
+            </Row>
             <StudentIdentity register={register}/>
             <GuardianInfo register={register}/>
             <Title>Explicações</Title>
             <SubjectsInfo register={register}/>
             {subjectCount.map(value => <Subjects register={register} key={value} id={value} removeSubject={removeSubject}/>)}
-            <button type="button" onClick={()=>addSubject()}>add</button>
-            <SubmitButton>Adicionar</SubmitButton> 
+            <button type="button" className="btn" onClick={()=>addSubject()}>Mais disciplinas</button>
         </form>
 
     )

@@ -3,7 +3,6 @@ import Title from "./Title"
 
 const StudentIdentity = ({register}) => (
     <div>
-        <Title>Dados do Aluno</Title>
         <div className="row">
             <div className="col-md-3">
                 <label htmlFor="firstName">Nome Próprio</label>

@@ -1,39 +1,22 @@
 import { Col, Container, Form, Row } from 'react-bootstrap'
 import './styles.scss'
 import { useForm } from "react-hook-form";
-import { logInToApp } from '../../firebase';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { useDispatch, useSelector } from 'react-redux';
-import firebase from 'firebase/app'
-import 'firebase/auth'
+import { useDispatch } from 'react-redux';
 import { loggingInToStore } from './actions';
 
 
 const Login = () => {
     const { register, handleSubmit } = useForm()
     const [passwordVisibility, setPasswordVisibility] = useState(false)
-    const [error, setError] = useState('')
-    const [loading, setLoading] = useState(true)
     const dispatch = useDispatch();
-    const user = useSelector(state => state.auth.uid)
 
+    // login handler
     const logInFormSubmit = (data) => {
-        if(data) {
-
-            dispatch(loggingInToStore(data))
-        }
+        dispatch(loggingInToStore(data))
     }
-    // auth handler
-    // const logInFormSubmit = async (data) => 
-    //     await logInToApp(data)
-    //     .catch(err => setError(err.code))
-        
-    // useEffect(() => {
-    //     console.log(firebase.auth().currentUser)
-    //     setLoading(!loading)
-    // }, [user])
 
     // password visibility field 
     const passwordVisibilityHandler = () => setPasswordVisibility(!passwordVisibility)

@@ -2,16 +2,28 @@ import './styles.scss'
 import { useDispatch, useSelector } from "react-redux"
 import { faEye, faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons"
 import FontAwesomeIcons from "../../components/Buttons/FontAwesomeIcons"
-import {removeStudentFromStore} from '../../screens/Explicador/actions'
+
+import { removeStudent } from '../../screens/Explicador/actions'
+
 import { useHistory } from "react-router-dom"
 import { useMemo } from "react"
 import { useTable } from 'react-table'
 import { useSortBy } from 'react-table/dist/react-table.development'
 
+
 const TutorTable = () => {
-    const explicandos = useSelector(state => state.explicandos)
+    const { students, loading } = useSelector(state => state.explicandos)
     const dispatch = useDispatch()
     const history = useHistory();
+
+    const handleRemoveStudent = (e, id) => {
+        e.stopPropagation();
+        dispatch(removeStudent(id))
+    }
+
+    const handleRowClick = (id) => {
+        history.push(`/alun@/${id}`)
+    }
 
     const columns = useMemo(
         () => [
@@ -47,8 +59,8 @@ const TutorTable = () => {
                 return (
                     <div>
                         <FontAwesomeIcons variant={'primary'} classes={"icons"} icon={faEye} fn={() => handleRowClick(row.original.id)}/>
-                        <FontAwesomeIcons variant={'secondary'} classes={"icons icon"} icon={faEdit} fn={(e)=>removeStudent(e, row.original.id)}/>
-                        <FontAwesomeIcons variant={'danger'} classes={"icons icon"} icon={faTrashAlt} fn={(e)=>removeStudent(e, row.original.id)}/>
+                        <FontAwesomeIcons variant={'secondary'} classes={"icons icon"} icon={faEdit} fn={(e)=>handleRemoveStudent(e, row.original.id)}/>
+                        <FontAwesomeIcons variant={'danger'} classes={"icons icon"} icon={faTrashAlt} fn={(e)=>handleRemoveStudent(e, row.original.id)}/>
                     </div>)}
           }
         ],
@@ -62,21 +74,15 @@ const TutorTable = () => {
         headerGroups,
         rows,
         prepareRow,
-      } = useTable({ columns, data: explicandos }, useSortBy)
+      } = useTable({ columns, data: students }, useSortBy)
 
-
-    const removeStudent = (e, id) => {
-        e.stopPropagation();
-        dispatch(removeStudentFromStore(id))
-    }
-
-    const handleRowClick = (id) => {
-        history.push(`/alun@/${id}`)
+    if (loading) {
+        return <div>.1.</div>
     }
 
     return (
         <div>
-            {explicandos.length >= 1 ? (
+            {students.length >= 1 ? (
                 <table {...getTableProps()} className="table table-hover table-striped table-align-right">
                 <thead>
                 {headerGroups.map(headerGroup => (

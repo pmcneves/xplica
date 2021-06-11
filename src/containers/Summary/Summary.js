@@ -8,14 +8,14 @@ const Summary = () => {
     // attendance counter
     let online = 0
     let presencial =0
-    explicandos.map(student => {
-        if(student.info.tutoring.attendance === 'Online') {
-            online += 1 
-        } else {
-            presencial += 1
-        }
-        return online && presencial
-    })
+    // explicandos.map(student => {
+    //     if(student.info.tutoring.attendance === 'Online') {
+    //         online += 1 
+    //     } else {
+    //         presencial += 1
+    //     }
+    //     return online && presencial
+    // })
 
     return (
         <Row  className="summary-layout__container">

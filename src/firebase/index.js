@@ -21,7 +21,7 @@ export const addStudentToDb = async (student) => await database.ref(`/students/$
 export const removeStudentFromDb = async (id) => await database.ref(`/students/${id}`).remove()
 
 export const fetchStudentsFromDb = async () => await database
-  .ref('students')
+  .ref(`students`)
   .once("value")
   .then(snapshot=> {
     const students = []

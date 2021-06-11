@@ -1,0 +1,1 @@
+export const getExpSlice = (state) => state.explicandos;
