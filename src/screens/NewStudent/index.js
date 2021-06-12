@@ -1,7 +1,7 @@
 import { Container } from 'react-bootstrap'
 import StudentForm from "../../containers/StudentForm/StudentForm"
 import { useDispatch } from "react-redux";
-import { submitStudent } from "../../screens/Explicador/actions";
+import { submitStudent } from "./actions";
 import { v4 as uuidv4 } from 'uuid'
 import { useHistory } from 'react-router';
 
@@ -24,8 +24,8 @@ const NewStudent = () => {
                     name: `${data.guardian.name.guardianFirstName} ${data.guardian.name.guardianLastName}`
                 }
             }
-        }))
-        history.push('/alun@s')
+        , history}))
+        // history.push('/alun@s')
     }
 
     return (

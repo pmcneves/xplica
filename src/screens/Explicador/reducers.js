@@ -24,18 +24,6 @@ const explicandosReducer = (state=initialState, action) => {
                 ...state,
                 loading: true,
             }
-        case types.ADD_STUDENT:
-            return {
-                ...state,
-                loading: false,
-                students: [
-                    ...state.students,
-                    {
-                        id: action.data.id,
-                        info: action.data.info
-                    }
-                ]
-            }
         case types.REMOVE_STUDENT:
             return {
                 ...state,

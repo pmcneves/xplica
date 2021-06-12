@@ -2,13 +2,13 @@ import './styles.scss'
 import { useDispatch, useSelector } from "react-redux"
 import { faEye, faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons"
 import FontAwesomeIcons from "../../components/Buttons/FontAwesomeIcons"
-
 import { removeStudent } from '../../screens/Explicador/actions'
-
 import { useHistory } from "react-router-dom"
 import { useMemo } from "react"
 import { useTable } from 'react-table'
 import { useSortBy } from 'react-table/dist/react-table.development'
+import Loader from '../../components/Loader/Loader'
+import NoStudents from '../../components/NoStudents/NoStudents'
 
 
 const TutorTable = () => {
@@ -77,7 +77,7 @@ const TutorTable = () => {
       } = useTable({ columns, data: students }, useSortBy)
 
     if (loading) {
-        return <div>.1.</div>
+        return <Loader/>
     }
 
     return (
@@ -115,7 +115,7 @@ const TutorTable = () => {
                 </tbody>
             </table>
             ) : (
-                <div>Loader</div>
+                <NoStudents />
             )}
         </div>
     )

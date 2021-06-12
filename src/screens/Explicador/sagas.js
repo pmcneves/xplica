@@ -1,5 +1,5 @@
 import { put, call, takeLatest, select } from '@redux-saga/core/effects'
-import { addStudentToDb, removeStudentFromDb, fetchStudentsFromDb } from '../../firebase'
+import { removeStudentFromDb, fetchStudentsFromDb } from '../../firebase'
 
 import types, { setStudents, addStudent } from './actions'
 import { getExpSlice } from './selectors';
@@ -9,15 +9,6 @@ function* loadAllStudents() {
         const students = yield call(fetchStudentsFromDb)
         yield put(setStudents(students))
     } catch(e) {
-        console.log(e)
-    }
-}
-
-function* submitStudent({ data }) {
-    try {
-        yield call(addStudentToDb, data)
-        yield put(addStudent(data))
-    } catch (e) {
         console.log(e)
     }
 }
@@ -35,6 +26,5 @@ function* removeStudent({ id }) {
 
 export default function* studentSagas() {
     yield takeLatest(types.GET_STUDENTS, loadAllStudents)
-    yield takeLatest(types.SUBMIT_STUDENT, submitStudent)
     yield takeLatest(types.REMOVE_STUDENT, removeStudent)
 }
