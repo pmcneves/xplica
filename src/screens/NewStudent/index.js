@@ -25,7 +25,6 @@ const NewStudent = () => {
                 }
             }
         , history}))
-        // history.push('/alun@s')
     }
 
     return (

@@ -7,6 +7,7 @@ import Error from '../screens/Error'
 import Login from '../screens/Login'
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute'
+import Profile from '../screens/Profile';
 
 
 export const history = createBrowserHistory();
@@ -15,9 +16,10 @@ const AppRouter = () => {
     return (
         <BrowserRouter>
             <Switch>
-                <PublicRoute path="/login" exact component={Login}/> 
+                <PublicRoute path="/" exact component={Login}/> 
                 <PrivateRoute path="/alun@s" component={ExplicadorMenu}/>
                 <PrivateRoute path="/adicionaralun@" component={NewStudent}/>
+                <PrivateRoute path="/profile" component={Profile}/>
                 <PrivateRoute path="/alun@/:id" component={Student}/>
                 <PrivateRoute component={Error}/>) 
             </Switch>        

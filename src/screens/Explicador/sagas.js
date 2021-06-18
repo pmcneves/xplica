@@ -1,7 +1,7 @@
 import { put, call, takeLatest, select } from '@redux-saga/core/effects'
 import { removeStudentFromDb, fetchStudentsFromDb } from '../../firebase'
 
-import types, { setStudents, addStudent } from './actions'
+import types, { setStudents } from './actions'
 import { getExpSlice } from './selectors';
 
 function* loadAllStudents() {
@@ -24,7 +24,7 @@ function* removeStudent({ id }) {
     }
 }
 
-export default function* studentSagas() {
+export default function* studentsSagas() {
     yield takeLatest(types.GET_STUDENTS, loadAllStudents)
     yield takeLatest(types.REMOVE_STUDENT, removeStudent)
 }

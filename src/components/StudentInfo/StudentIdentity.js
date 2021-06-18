@@ -1,5 +1,4 @@
 import { ageOptions, gradesArr } from "../../screens/Explicador/utils"
-import Title from "./Title"
 
 const StudentIdentity = ({register}) => (
     <div>

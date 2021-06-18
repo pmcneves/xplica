@@ -19,6 +19,6 @@ export const setUserUid = (uid) => ({
     uid
 })
 
-export const loggingOutFromStore = () => ({
+export const logOut = () => ({
     type: typesAuth.LOG_OUT
 })

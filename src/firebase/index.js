@@ -16,9 +16,13 @@ firebase.initializeApp(firebaseConfig)
 const database = firebase.database()
 const auth = firebase.auth()
 
-export const addStudentToDb = async (student) => await database.ref(`/students/${student.id}`).set(student.info);
+export const addStudentToDb = async (student) => await database
+  .ref(`/students/${student.id}`)
+  .set(student.info);
 
-export const removeStudentFromDb = async (id) => await database.ref(`/students/${id}`).remove()
+export const removeStudentFromDb = async (id) => await database
+.ref(`/students/${id}`)
+.remove()
 
 export const fetchStudentsFromDb = async () => await database
   .ref(`students`)
@@ -29,6 +33,15 @@ export const fetchStudentsFromDb = async () => await database
       students.push({id: childSnapshot.key, info: childSnapshot.val()})
     })
     return students
+  })
+
+export const fetchStudentFromDb = async (id) => await database
+  .ref(`students/${id}`)
+  .once("value")
+  .then(snapshot => {
+    const student = snapshot.val();
+    // console.log(student)
+    return student
   })
 
 export const logInToApp = async (data) => await auth

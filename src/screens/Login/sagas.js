@@ -19,9 +19,13 @@ function* logIn({data}) {
 }
 
 function* logOut() {
-    yield call(logOutFromApp)
-    yield put({type: typesAuth.LOG_OUT_FROM_STORE})
-    yield call(eraseUid)
+    try {
+        yield call(logOutFromApp)
+        yield put({type: typesAuth.LOG_OUT_FROM_STORE})
+        yield call(eraseUid)
+    } catch(e) {
+        console.log(e)
+    }
 }
 
 export default function* authSagas() {

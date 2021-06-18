@@ -4,13 +4,13 @@ import { faCog } from '@fortawesome/free-solid-svg-icons'
 import { Nav, Navbar, NavbarBrand, NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { useDispatch } from 'react-redux'
-import { loggingOutFromStore } from '../../screens/Login/actions'
+import { logOut } from '../../screens/Login/actions'
 
 
 const Header = () => {
     const dispatch = useDispatch()
 
-    const logout = () => dispatch(loggingOutFromStore())
+    const logout = () => dispatch(logOut())
 
     return (
         <header>
@@ -21,14 +21,14 @@ const Header = () => {
                     </NavbarBrand>
                     <div>
                         <ul className="navbar-nav">
-                            <LinkContainer to="/alun@s">
-                                <Nav.Link> Alun@s </Nav.Link>
-                            </LinkContainer>
                             <LinkContainer to="/adicionaralun@">
                                 <Nav.Link> Adicionar alun@ </Nav.Link>
                             </LinkContainer>
+                            <LinkContainer to="/alun@s">
+                                <Nav.Link> Alun@s </Nav.Link>
+                            </LinkContainer>
                             <NavDropdown title={<FontAwesomeIcons icon={faCog} classes={"btn-cog"}/>} id="basic-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.3">Perfil</NavDropdown.Item>
+                                <NavDropdown.Item href="/profile">Perfil</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item onClick={logout}>Terminar sessão</NavDropdown.Item>
                             </NavDropdown>

@@ -4,6 +4,7 @@ import explicandosReducer from '../screens/Explicador/reducers'
 import createSagaMiddleware from 'redux-saga'
 import sagas from './sagas'
 import authReducer from "../screens/Login/reducers"
+import studentReducer from "../screens/Student/reducers"
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -12,6 +13,7 @@ const configureStore = () => {
         combineReducers({
             explicandos: explicandosReducer,
             auth: authReducer,
+            student: studentReducer,
         }),
         composeWithDevTools(applyMiddleware(sagaMiddleware))
     );
