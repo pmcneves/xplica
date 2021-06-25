@@ -2,5 +2,84 @@
     background-color: #fff;
     border: #212529 2px solid;
     border-radius: 10px;
+    word-wrap: break-word;
+}
+
+.student__icons__wrapper {
+    justify-content: center;
+}
+
+.student__icon__wrapper {
+    text-align: center;
+}
+
+.student__icon {
+    color: lighten(#212529, 20%);
+    cursor: pointer;
+    &--active {
+        color: #212529;
+    }
+    :hover {
+        color: #212529;
+    }
+}
+
+.student__name {
+    font-size: 30px;
+    font-family: 'Kaushan Script', cursive;
+    text-align: center;
+}
+
+.student__animation {
+    animation: fadeIn 0.6s
+}
+
+.student__label {
+    color: #266150;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.student__text {
+    font-weight: bold;
+    font-size: 17px
+}
+
+.student__subject__labels {
     display: flex;
+    justify-content: center;
+}
+
+.student__subject__label--active {
+    color: red
+}
+
+
+.student__subject__label {
+    color: lighten(#212529, 30%);
+    cursor: pointer;
+    font-weight: bold;
+    &--active {
+        color: #212529;
+    }
+    &:hover {
+        color: #212529;
+    }
+    &:not(:first-child) {
+        margin-left: 10px
+    }
+}
+
+@media (min-width: 767px) {
+    .student__subject__labels {
+        flex-direction: column;
+    }
+    .student__subject__label:not(:first-child) {
+        margin-left: 0
+    }
+} 
+
+@keyframes fadeIn {
+    from {opacity: 0};
+    to {opacity: 1}
 }

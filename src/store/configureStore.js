@@ -13,7 +13,7 @@ const configureStore = () => {
         combineReducers({
             explicandos: explicandosReducer,
             auth: authReducer,
-            student: studentReducer,
+            studentInfo: studentReducer,
         }),
         composeWithDevTools(applyMiddleware(sagaMiddleware))
     );

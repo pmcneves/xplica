@@ -1,11 +1,11 @@
 import SubmitButton from "../../components/Buttons/SubmitButton";
 import { useForm } from "react-hook-form";
-import StudentIdentity from "../../components/StudentInfo/StudentIdentity";
-import GuardianInfo from "../../components/StudentInfo/GuardianInfo";
-import SubjectsInfo from "../../components/StudentInfo/SubjectsInfo";
+import StudentIdentity from "../../components/StudentFormInfo/StudentIdentity";
+import GuardianInfo from "../../components/StudentFormInfo/GuardianInfo";
+import SubjectsInfo from "../../components/StudentFormInfo/SubjectsInfo";
 import { useState } from "react";
-import Title from "../../components/StudentInfo/Title";
-import Subjects from "../../components/StudentInfo/Subjects";
+import Title from "../../components/StudentFormInfo/Title";
+import Subjects from "../../components/StudentFormInfo/Subjects";
 import { Row } from "react-bootstrap";
 
 

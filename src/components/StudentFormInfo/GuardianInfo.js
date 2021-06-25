@@ -8,7 +8,7 @@ const GuardianInfo = ({register}) => (
         </Title>
         <div className="row">
             <div className="col-md-3">
-                <label htmlFor="guardianFirstName">Nome</label>
+                <label className="form-label" htmlFor="guardianFirstName">Nome</label>
                 <input 
                     type="text" 
                     className="form-control" 
@@ -16,7 +16,7 @@ const GuardianInfo = ({register}) => (
                     {...register("guardian.name.guardianFirstName")}/>
             </div>
             <div className="col-md-3">
-                <label htmlFor="guardianLastName">Apelido</label>
+                <label className="form-label" htmlFor="guardianLastName">Apelido</label>
                 <input 
                     type="text" 
                     className="form-control" 
@@ -24,7 +24,7 @@ const GuardianInfo = ({register}) => (
                     {...register("guardian.name.guardianLastName")}/>
             </div>
             <div className="col-md-3">
-                <label htmlFor="kinship">Grau de parentesco</label>
+                <label className="form-label" htmlFor="kinship">Grau de parentesco</label>
                 <input 
                     type="text" 
                     className="form-control" 
@@ -32,7 +32,7 @@ const GuardianInfo = ({register}) => (
                     {...register("guardian.kinship")}/>
             </div>
             <div className="col-md-3">
-                <label htmlFor="guardianContact">Telemóvel</label>
+                <label className="form-label" htmlFor="guardianContact">Telemóvel</label>
                 <input 
                     type="text" 
                     className="form-control" 
@@ -42,7 +42,7 @@ const GuardianInfo = ({register}) => (
         </div>
         <div className="row">
             <div className="col-md-3">
-                <label htmlFor="guardianEmail">E-mail</label>
+                <label className="form-label" htmlFor="guardianEmail">E-mail</label>
                 <input 
                     type="text" 
                     className="form-control" 
@@ -50,7 +50,7 @@ const GuardianInfo = ({register}) => (
                     {...register("guardian.guardianEmail")}/>
             </div>
             <div className="col-md-9">
-                <label htmlFor="guardianObservations">Observações</label>
+                <label className="form-label" htmlFor="guardianObservations">Observações</label>
                 <input 
                     type="text" 
                     className="form-control" 

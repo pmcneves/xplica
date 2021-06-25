@@ -4,21 +4,21 @@ const StudentIdentity = ({register}) => (
     <div>
         <div className="row">
             <div className="col-md-3">
-                <label htmlFor="firstName">Nome Próprio</label>
+                <label className="form-label" htmlFor="firstName">Nome Próprio</label>
                 <input 
                     className="form-control"
                     placeholder="Nome"
                     {...register("student.name.firstName")} />
             </div>
             <div className="col-md-3">
-                <label htmlFor="lastName">Apelido</label>
+                <label className="form-label" htmlFor="lastName">Apelido</label>
                 <input 
                     className="form-control"
                     placeholder="Apelido"
                     {...register("student.name.lastName")} />
             </div>
             <div className="col-md-3">
-                <label htmlFor="age">Idade</label>
+                <label className="form-label" htmlFor="age">Idade</label>
                 <select 
                     className="form-select"
                     {...register("student.age")}>
@@ -26,7 +26,7 @@ const StudentIdentity = ({register}) => (
                 </select>
             </div>
             <div className="col-md-3">
-                <label htmlFor="grade">Ano</label>
+                <label className="form-label" htmlFor="grade">Ano</label>
                 <select 
                     className="form-select"
                     {...register("student.grade")}>
@@ -36,7 +36,7 @@ const StudentIdentity = ({register}) => (
         </div>
         <div className="row">
             <div className="col-md-3">
-                <label htmlFor="location">Concelho (Habitação)</label>
+                <label className="form-label" htmlFor="location">Concelho (Habitação)</label>
                 <input 
                     type="text" 
                     className="form-control" 
@@ -44,7 +44,7 @@ const StudentIdentity = ({register}) => (
                     {...register("student.location")}/>
             </div>
             <div className="col-md-3">
-                <label htmlFor="contact">Telemóvel</label>
+                <label className="form-label" htmlFor="contact">Telemóvel</label>
                 <input
                     type="text"  
                     className="form-control" 
@@ -52,7 +52,7 @@ const StudentIdentity = ({register}) => (
                     {...register("student.contact")}/>
             </div>
             <div className="col-md-3">
-                <label htmlFor="email">E-mail</label>
+                <label className="form-label" htmlFor="email">E-mail</label>
                 <input 
                     type="text" 
                     className="form-control" 
@@ -60,7 +60,7 @@ const StudentIdentity = ({register}) => (
                     {...register("student.email")}/>
             </div>
             <div className="col-md-3">
-                <label htmlFor="school">Escola</label>
+                <label className="form-label" htmlFor="school">Escola</label>
                 <input 
                     type="text" 
                     className="form-control" 
