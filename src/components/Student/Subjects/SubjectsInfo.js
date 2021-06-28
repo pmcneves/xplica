@@ -6,7 +6,7 @@ import Topic from "./Topic"
 
 const SubjectsInfo = () => {
     const {subjects} = useContext(studentInfo).tutoring
-    const [topicsToShow, setTopicsToShow] = useState(subjects.length)
+    const topicsToShow = subjects.length
 
     //always shows the first subject, unless clicked on another
     const [topicName, setTopicName] = useState(subjects[0].subject)
@@ -17,19 +17,15 @@ const SubjectsInfo = () => {
         setTopicShown(topic)
     }
 
-
-
-    console.log(topicShown)
-
     return (
         <Container className="text-center student__animation">
             <Row>
-                <Col xs={12} md={3} styles={{margin: 'auto 0'}}>
+                <Col xs={12} md={2} style={{margin: 'auto 0'}}>
                     {topicsToShow === 1 ? (
-                        <h3>{topicName}</h3> 
+                        <h4>{topicName}</h4> 
                      ) : (
                         <div>
-                            <h5 className="student__subject__labels">
+                            <h6 className="student__subject__labels">
                                 {subjects.map(topic => (
                                         <SubjectNameMenu 
                                             key={topic.subject} 
@@ -37,7 +33,7 @@ const SubjectsInfo = () => {
                                             subject={topic.subject}
                                             fn={()=>subjectChange(topic)}/>
                                     ))}
-                            </h5>
+                            </h6>
                         </div>
                      )}
                 </Col>
@@ -45,35 +41,8 @@ const SubjectsInfo = () => {
                     <Topic subject={topicShown} />
                 </Col>
             </Row>
-
-                
         </Container>
     )
 }
 
 export default SubjectsInfo
-
-
-/*           
-{subjectsLength && (
-    <div>
-        <Row>
-            <Col>
-                <h2>{tutoring.subjects[0].subject}</h2>
-            </Col>
-        </Row> 
-        <Row>
-            <Topic/>
-        </Row>
-    </div>)}
-{!subjectsLength && (
-    <Row>
-        <Col sm={12} md={3} className="student__subject__labels">
-            { tutoring.subjects.map( topic => <SubjectNameMenu key={topic.subject} subject={topic.subject} setSubject={setSubject}/> )}
-        </Col>
-        <Col>
-            { tutoring.subjects.map( topic => <Topic key={topic.subject} subject={topic} /> )}
-        </Col>
-    </Row>
-    )} 
-*/

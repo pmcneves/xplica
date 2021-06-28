@@ -27,7 +27,7 @@ const StudentCard = () => {
                 {name}
             </div>
             <StudentIcons setDivToShow={setDivToShow} divToShow={divToShow}/>
-            <div style={{minHeight:'300px'}}>
+            <div style={{minHeight:'150px'}}>
                 {getDiv(divToShow)} 
             </div>
         </div>

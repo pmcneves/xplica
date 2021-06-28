@@ -50,11 +50,6 @@
     justify-content: center;
 }
 
-.student__subject__label--active {
-    color: red
-}
-
-
 .student__subject__label {
     color: lighten(#212529, 30%);
     cursor: pointer;
@@ -67,6 +62,20 @@
     }
     &:not(:first-child) {
         margin-left: 10px
+    }
+}
+
+.close {
+    background-color: transparent;
+    border: 0;
+    color: #212529;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1;
+    opacity: .5;
+    text-shadow: 0 1px 0 #fff;
+    &:hover {
+        opacity: 1
     }
 }
 

@@ -3,7 +3,8 @@ const SubmitButton = ({children}) => {
         <div>
             <button 
                 type="submit" 
-                className="btn btn-primary" 
+                className="btn btn-primary"
+                onClick={e=>e.preventDefault()} 
                 >
                     {children}
                 </button>

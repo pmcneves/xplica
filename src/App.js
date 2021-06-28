@@ -1,6 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import './styles.scss'
+
+import 'react-dates/lib/css/_datepicker.css';
 import { Provider } from 'react-redux';
 import AppRouter from './routes'
 import configureStore from './store/configureStore';

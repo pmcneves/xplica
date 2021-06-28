@@ -16,6 +16,7 @@ const Student = (props) => {
     const loading = useSelector(state=>state.studentInfo.loading)
 
 
+
     useEffect(() => {
         dispatch(getStudent(props.match.params.id))
     }, [])
@@ -30,13 +31,13 @@ const Student = (props) => {
                 <div className="student__wrapper">
                     <studentInfo.Provider value={info}>
                         <Row>
-                            <Col>
+                            <Col className="mb-4">
                                 <StudentCard />
                             </Col>
                         </Row>
                         <Row>
-                            <Col>
-                                <GradesCard />
+                            <Col className="mb-4">
+                                <GradesCard/>
                             </Col>
                         </Row>
                     </studentInfo.Provider>
