@@ -1,0 +1,13 @@
+.tableBtn {
+    background: none;
+    border: none;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 20px;
+    transition: color .15s linear ;
+    &:hover {
+        color: rgba(0, 0, 0, 1);
+    }
+    &:not(:first-child) {
+        margin-left: 5px;
+    }
+}

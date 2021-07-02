@@ -30,7 +30,7 @@ const GradesCard = () => {
                     </Button>
                 </Col>
             </Row>
-            <GradesModal isModalOpen={isModalOpen} handleModalClose={handleModalClose}/>
+            <GradesModal isModalOpen={isModalOpen} handleModalClose={handleModalClose} subjects={subjects}/>
         </Container>
 
 

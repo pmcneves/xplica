@@ -4,26 +4,22 @@ import { faEye, faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons"
 import FontAwesomeIcons from "../../components/Buttons/FontAwesomeIcons"
 import { removeStudent } from '../../screens/Explicador/actions'
 import { useHistory } from "react-router-dom"
-import { useMemo } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useTable } from 'react-table'
 import { useSortBy } from 'react-table/dist/react-table.development'
 import Loader from '../../components/Loader/Loader'
 import NoStudents from '../../components/NoStudents/NoStudents'
-
+import { useWindowSize } from '../../hooks/useWindowSize'
+import TableButtons from '../../components/Buttons/TableButtons'
+import { Button, Modal } from 'react-bootstrap'
 
 const TutorTable = () => {
     const { students, loading } = useSelector(state => state.explicandos)
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [idToRemove, setIdToRemove] = useState('')
+    const width = useWindowSize();
     const dispatch = useDispatch()
     const history = useHistory();
-
-    const handleRemoveStudent = (e, id) => {
-        e.stopPropagation();
-        dispatch(removeStudent(id))
-    }
-
-    const handleRowClick = (id) => {
-        history.push(`/alun@/${id}`)
-    }
 
     const columns = useMemo(
         () => [
@@ -37,6 +33,7 @@ const TutorTable = () => {
           },
           {
             Header: 'Ano',
+            id: 'Ano',
             accessor: 'info.student.grade',
           },
           {
@@ -45,10 +42,12 @@ const TutorTable = () => {
           },
           {
             Header: 'Contacto',
+            id:'Contacto',
             accessor: 'info.student.contact',
           },
           {
             Header: 'Regime',
+            id:'Regime',
             accessor: d => d.info.tutoring.attendance,
           },
           {
@@ -58,15 +57,13 @@ const TutorTable = () => {
             Cell: ({row}) => {
                 return (
                     <div>
-                        <FontAwesomeIcons variant={'primary'} classes={"icons"} icon={faEye} fn={() => handleRowClick(row.original.id)}/>
-                        <FontAwesomeIcons variant={'secondary'} classes={"icons icon"} icon={faEdit} fn={(e)=>handleRemoveStudent(e, row.original.id)}/>
-                        <FontAwesomeIcons variant={'danger'} classes={"icons icon"} icon={faTrashAlt} fn={(e)=>handleRemoveStudent(e, row.original.id)}/>
+                        <TableButtons icon={faEye} fn={(e) => pushStudentBtnClick(e, row.original.id)}/>
+                        <TableButtons icon={faTrashAlt} fn={e=>openModal(e, row.original.id)}/>
                     </div>)}
           }
         ],
         []
     )      
-
 
     const {
         getTableProps,
@@ -74,11 +71,57 @@ const TutorTable = () => {
         headerGroups,
         rows,
         prepareRow,
-      } = useTable({ columns, data: students }, useSortBy)
+        setHiddenColumns,
+    } = useTable({
+            columns, 
+            data: students,
+            initialState: {
+                hiddenColumns: []
+            }
+        }, useSortBy)
 
-    if (loading) {
-        return <Loader/>
+
+    //hiding columns on width change
+    useEffect(() => {
+        const hiddenArr=['Disciplina(s)', 'Regime', 'Contacto', 'Ano']
+        if(width<558)   
+            setHiddenColumns(hiddenArr)
+        else 
+            setHiddenColumns([])
+    }, [width])
+
+
+    //modal
+    const openModal = (e,id) => {
+        e.stopPropagation();
+        setIsModalOpen(true)
+        setIdToRemove(id)
     }
+
+    const closeModal = () => {
+        setIsModalOpen(false)
+        setIdToRemove()
+    }
+
+    const handleRemoveStudent = id => {
+        dispatch(removeStudent(id))
+        closeModal()
+    }
+
+    //pushing to student on row click
+    const pushStudentRowClick = (id) => {
+        history.push(`/alun@/${id}`)
+    }
+
+    //pushing to student on btn click
+    const pushStudentBtnClick = (e, id) => {
+        e.stopPropagation();
+        history.push(`/alun@/${id}`)
+    }
+
+    //fetching data
+    if (loading) 
+        return <Loader/>
 
     return (
         <div>
@@ -89,7 +132,7 @@ const TutorTable = () => {
                     <tr {...headerGroup.getHeaderGroupProps()} className="table-header">
                         {headerGroup.headers.map(column => (
                             <th {...column.getHeaderProps(column.getSortByToggleProps())} >
-                                {column.render('Header')}
+                                    {column.render('Header')}
                             </th>
                         ))}
                     </tr>
@@ -99,11 +142,13 @@ const TutorTable = () => {
                     {rows.map(row => {
                         prepareRow(row)
                         return (
-                            <tr {...row.getRowProps()} onClick={()=>handleRowClick(row.original.id)} className="align-middle cursor">
+                            <tr {...row.getRowProps()} onClick={()=>pushStudentRowClick(row.original.id)} className="align-middle cursor">
                                 {row.cells.map(cell => {
                                     return (
                                         <td {...cell.getCellProps({
-                                            style: {width: cell.column.width }
+                                            style: {
+                                                width: cell.column.width,
+                                            }
                                         })}>
                                             {cell.render('Cell')}
                                         </td>
@@ -117,6 +162,26 @@ const TutorTable = () => {
             ) : (
                 <NoStudents />
             )}
+            <Modal
+                show={isModalOpen}
+                onHide={closeModal}
+                centered
+                animation={false}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Remover alun@</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        Tem a certeza?
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={closeModal}>
+                            Fechar
+                        </Button>
+                        <Button onClick={()=>handleRemoveStudent(idToRemove)}>
+                            Remover
+                        </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }

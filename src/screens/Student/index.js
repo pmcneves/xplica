@@ -15,8 +15,6 @@ const Student = (props) => {
     const info = useSelector(state=>state.studentInfo.student)
     const loading = useSelector(state=>state.studentInfo.loading)
 
-
-
     useEffect(() => {
         dispatch(getStudent(props.match.params.id))
     }, [])
@@ -24,7 +22,6 @@ const Student = (props) => {
     if(loading) 
         return <Loader/>
     
-
     return (
         <Container className="mt-5">
             <Col lg={8} className="m-auto">

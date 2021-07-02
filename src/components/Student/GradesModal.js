@@ -1,28 +1,23 @@
-import { useEffect, useState } from "react";
-import { Modal, Button } from "react-bootstrap"
+import "react-datepicker/dist/react-datepicker.css";
+import { useState } from "react";
+import { Modal, Button, Row, Col } from "react-bootstrap"
 import DatePicker, { registerLocale } from "react-datepicker";
-import { useContext } from 'react'
-import {studentInfo} from '../../screens/Student'
 import { useForm, Controller } from "react-hook-form";
 import pt from 'date-fns/locale/pt';
-import "react-datepicker/dist/react-datepicker.css";
-import SubmitButton from "../Buttons/SubmitButton";
 
 
-const GradesModal = ({isModalOpen, handleModalClose}) => {
+const GradesModal = ({isModalOpen, handleModalClose, subjects}) => {
 
-    const { register, handleSubmit, unregister, control } = useForm();
-    const [date, setDate] = useState(null)
-    const [formattedDate, setFormattedDate] = useState()
-    // const {subjects} = useContext(studentInfo).tutoring
-    // console.log(subjects.find(subject => subject.attendance))
+    const { register, handleSubmit, control } = useForm();
     registerLocale('pt', pt)
 
+    console.log (subjects)
+    
 
-    useEffect(()=> {
-        if(date !== null)
-            setFormattedDate(date.toLocaleString().split(',')[0])
-    }, [date])
+    // useEffect(()=> {
+    //     if(date !== null)
+    //         setFormattedDate(date.toLocaleString().split(',')[0])
+    // }, [date])
 
 
     const handleAddAssessment = data => {
@@ -38,35 +33,48 @@ const GradesModal = ({isModalOpen, handleModalClose}) => {
                 <Modal.Header closeButton>
                     <Modal.Title>Avaliações</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    <form onSubmit={handleSubmit(handleAddAssessment)}>
+                <form onSubmit={handleSubmit(handleAddAssessment)}>
+                    <Modal.Body>
+                        <select
+                            className="form-select"
+                            {...register(`assessment.1.subject`)}>
+                                {subjects.map((subjectToAccess, i)=> <option key={i}>{subjectToAccess.subject}</option>)}
+                        </select>
                         <Controller
-                            render = {({field}) => {
-                                console.log(field.value)
-                                return (
-                                <DatePicker
-                                    placeholderText = 'Data'
-                                    dateFormat='dd/MM/yyyy'
-                                    isClearable
-                                    locale="pt" 
-                                    selected={field.value}
-                                    onChange={(e) => field.onChange(e)} 
-                                />
-                            )}}
                             control={control}
-                            name="assessment"
+                            name="assessment.1.date"
+                            render = {({field}) => {
+                                return (
+                                    <DatePicker
+                                        placeholderText = 'Data'
+                                        dateFormat='dd/MM/yyyy'
+                                        isClearable
+                                        locale="pt" 
+                                        selected={field.value}
+                                        onChange={e => field.onChange(e) } 
+                                    />
+                                )
+                            }}
                         />
-                        <button type="submit">submit</button>
-                    </form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleModalClose}>
-                        Fechar
-                    </Button>
-                    <SubmitButton>
-                        Adicionar
-                    </SubmitButton>
-                </Modal.Footer>
+                        <select
+                            className="form-select"
+                            {...register(`assessment.1.type`)}>
+                                <option>Questão-Aula</option>
+                                <option>Teste</option>
+                        </select>
+                        <input 
+                           type="text"
+                           {...register(`assessment.1.assessmentGrade`)} />
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleModalClose}>
+                            Fechar
+                        </Button>
+                        <Button variant="primary" type="submit">
+                            Adicionar
+                        </Button>
+                    </Modal.Footer>
+                </form>
         </Modal>
     )
 }
