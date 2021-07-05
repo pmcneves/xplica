@@ -1,7 +1,6 @@
 import './styles.scss'
 import { useDispatch, useSelector } from "react-redux"
-import { faEye, faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons"
-import FontAwesomeIcons from "../../components/Buttons/FontAwesomeIcons"
+import { faEye, faTrashAlt } from "@fortawesome/free-solid-svg-icons"
 import { removeStudent } from '../../screens/Explicador/actions'
 import { useHistory } from "react-router-dom"
 import { useEffect, useMemo, useState } from "react"
@@ -62,6 +61,7 @@ const TutorTable = () => {
                     </div>)}
           }
         ],
+        //eslint-disable-next-line react-hooks/exhaustive-deps
         []
     )      
 
@@ -88,6 +88,7 @@ const TutorTable = () => {
             setHiddenColumns(hiddenArr)
         else 
             setHiddenColumns([])
+            //eslint-disable-next-line react-hooks/exhaustive-deps
     }, [width])
 
 

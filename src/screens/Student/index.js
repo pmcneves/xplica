@@ -17,7 +17,8 @@ const Student = (props) => {
 
     useEffect(() => {
         dispatch(getStudent(props.match.params.id))
-    }, [])
+        //eslint-disable-next-line react-hooks/exhaustive-deps   
+    }, [props.match.params.id])
 
     if(loading) 
         return <Loader/>

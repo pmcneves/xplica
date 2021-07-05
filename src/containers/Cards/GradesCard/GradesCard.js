@@ -1,17 +1,26 @@
 import { useContext } from "react"
 import { studentInfo } from "../../../screens/Student"
-import { Container, Row, Col, Modal, Button } from "react-bootstrap"
-import { useState } from 'react'
+import { Container, Row, Col, Button } from "react-bootstrap"
+import { useState, useEffect } from 'react'
 import GradesModal from "../../../components/Student/GradesModal"
 
+
 const GradesCard = () => {
-    const {subjects} = useContext(studentInfo).tutoring
+    const studentData = useContext(studentInfo)
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [assessmentNumber, setAssessmentNumber] = useState(0)
+
+    useEffect(() => {
+        if(studentData.assessments !== undefined)
+            setAssessmentNumber(studentData.assessments.length)
+        //eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    // console.log(studentData, assessmentNumber)
 
     const handleModalOpen = () => {
         setIsModalOpen(true)
     }
-
     const handleModalClose = () => {
         setIsModalOpen(false)
     }
@@ -30,7 +39,7 @@ const GradesCard = () => {
                     </Button>
                 </Col>
             </Row>
-            <GradesModal isModalOpen={isModalOpen} handleModalClose={handleModalClose} subjects={subjects}/>
+            <GradesModal isModalOpen={isModalOpen} handleModalClose={handleModalClose} studentData={studentData} assessmentNumber={assessmentNumber}/>
         </Container>
 
 

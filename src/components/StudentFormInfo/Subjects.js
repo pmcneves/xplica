@@ -1,16 +1,9 @@
 import { Row, Col, Form } from "react-bootstrap"
-import FontAwesomeIcons from "../Buttons/FontAwesomeIcons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlusCircle, faTimes } from "@fortawesome/free-solid-svg-icons"
 import { durationPerWeek } from "../../screens/Explicador/utils"
-import { useEffect, useState } from "react"
 
 const Subjects = ({ register, id, removeSubject, addSubject, subjectCount }) => {
-
-    const [subject, setSubject] = useState('')
-    const [value, setValue] = useState('')
-
-
     return (
         <Row>
             <Col md={2}>

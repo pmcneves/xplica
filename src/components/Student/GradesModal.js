@@ -1,29 +1,37 @@
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
-import { Modal, Button, Row, Col } from "react-bootstrap"
+import { Modal, Button } from "react-bootstrap"
 import DatePicker, { registerLocale } from "react-datepicker";
 import { useForm, Controller } from "react-hook-form";
 import pt from 'date-fns/locale/pt';
+import { newStudentAssessment } from "../../screens/Student/actions";
+import { useDispatch, useSelector } from 'react-redux'
+import { addNewAssessment } from "../../firebase"
 
+const GradesModal = ({isModalOpen, handleModalClose, studentData, assessmentNumber}) => {
 
-const GradesModal = ({isModalOpen, handleModalClose, subjects}) => {
-
+    const currentStudentId = useSelector(state=>state.studentInfo.studentId)
+    const dispatch = useDispatch()
+    const [assessmentGradeType, setAssessmentGradeType] = useState('%')
     const { register, handleSubmit, control } = useForm();
     registerLocale('pt', pt)
 
-    console.log (subjects)
-    
+    // console.log(assessmentNumber)
 
-    // useEffect(()=> {
-    //     if(date !== null)
-    //         setFormattedDate(date.toLocaleString().split(',')[0])
-    // }, [date])
+    const addNewAssessments = data => {
+        const transformedData = {
+            currentStudentId,
+            assessmentInfo: {
+                ...data,
+                date: data.date.toLocaleString().split(',')[0]
+            }
+        }
+            console.log(transformedData)
 
 
-    const handleAddAssessment = data => {
-        console.log(data)
+        addNewAssessment(transformedData)
     }
-
+ 
     return (
         <Modal 
             show={isModalOpen}
@@ -33,16 +41,16 @@ const GradesModal = ({isModalOpen, handleModalClose, subjects}) => {
                 <Modal.Header closeButton>
                     <Modal.Title>Avaliações</Modal.Title>
                 </Modal.Header>
-                <form onSubmit={handleSubmit(handleAddAssessment)}>
+                <form onSubmit={handleSubmit(addNewAssessments)}>
                     <Modal.Body>
                         <select
                             className="form-select"
-                            {...register(`assessment.1.subject`)}>
-                                {subjects.map((subjectToAccess, i)=> <option key={i}>{subjectToAccess.subject}</option>)}
+                            {...register(`subject`)}>
+                                {studentData.tutoring.subjects.map((subjectToAccess, i)=> <option key={i}>{subjectToAccess.subject}</option>)}
                         </select>
                         <Controller
                             control={control}
-                            name="assessment.1.date"
+                            name={`date`}
                             render = {({field}) => {
                                 return (
                                     <DatePicker
@@ -58,13 +66,20 @@ const GradesModal = ({isModalOpen, handleModalClose, subjects}) => {
                         />
                         <select
                             className="form-select"
-                            {...register(`assessment.1.type`)}>
+                            {...register(`type`)}>
                                 <option>Questão-Aula</option>
                                 <option>Teste</option>
                         </select>
                         <input 
                            type="text"
-                           {...register(`assessment.1.assessmentGrade`)} />
+                           {...register(`assessmentGrade`)} />
+                        <select
+                            className="form-select"
+                            value={assessmentGradeType}
+                            onChange={e=>setAssessmentGradeType(e.target.value)}>
+                                <option value="%">%</option>
+                                <option value="val">val</option>
+                        </select>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleModalClose}>

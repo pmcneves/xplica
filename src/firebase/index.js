@@ -16,6 +16,11 @@ firebase.initializeApp(firebaseConfig)
 const database = firebase.database()
 const auth = firebase.auth()
 
+export const addNewAssessment = async (newAssessment) => await database
+  .ref(`students/${newAssessment.currentStudentId}/assessments`)
+  .set(newAssessment.assessmentInfo)
+  // .then(console.log(newAssessment))
+
 export const addStudentToDb = async (student) => await database
   .ref(`/students/${student.id}`)
   .set(student.info);

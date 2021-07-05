@@ -17,7 +17,24 @@ const studentReducer = (state=initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                student: action.student
+                student: action.student.studentInfo, 
+                studentId: action.student.id
+            }
+        case types.ACTIVE_STUDENT:
+            return {
+                ...state,
+                active: action.id
+            }
+        case types.NEW_ASSESSMENT:
+            return {
+                ...state,
+                student: {
+                    ...state.student,
+                    assessments: [
+                        // ...state.student.assessments,
+                        action.newAssessment
+                    ]
+                }
             }
         default:
             return state
