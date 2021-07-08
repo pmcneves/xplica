@@ -2,10 +2,16 @@ import { takeLatest, call, put } from "@redux-saga/core/effects"
 import { addNewAssessment, fetchStudentFromDb } from "../../firebase"
 import types, { setStudent } from "./actions"
 
-function* newAssesmments({data}) {
-    console.log(data)
+function* newAssesmments({newAssessment}) {
+    console.log(newAssessment)
+    const assessment = {
+        ...newAssessment.assessmentInfo,
+        id: newAssessment.assessmentId,
+    }
+    console.log(assessment)
     try {   
-        yield call(addNewAssessment, data)
+        yield call(addNewAssessment, newAssessment)
+        yield put({type:types.SET_ASSESSMENT, assessment})
     } catch(e) {
         console.log(e)
     }

@@ -17,9 +17,8 @@ const database = firebase.database()
 const auth = firebase.auth()
 
 export const addNewAssessment = async (newAssessment) => await database
-  .ref(`students/${newAssessment.currentStudentId}/assessments`)
+  .ref(`students/${newAssessment.currentStudentId}/assessments/${newAssessment.assessmentId}`)
   .set(newAssessment.assessmentInfo)
-  // .then(console.log(newAssessment))
 
 export const addStudentToDb = async (student) => await database
   .ref(`/students/${student.id}`)
@@ -45,7 +44,11 @@ export const fetchStudentFromDb = async (id) => await database
   .once("value")
   .then(snapshot => {
     const student = snapshot.val();
-    // console.log(student)
+    if(student.assessments) {
+      student.assessments = Object.keys(student.assessments).map(key=>({
+        ...student.assessments[key],
+        id: key
+    }))}
     return student
   })
 

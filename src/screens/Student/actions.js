@@ -2,7 +2,8 @@ const types = {
     GET_STUDENT: 'GET_STUDENT',
     SET_STUDENT: 'SET_STUDENT',
     ACTIVE_STUDENT: 'ACTIVE_STUDENT',
-    NEW_ASSESSMENT: 'NEW_ASSESSMENT'
+    NEW_ASSESSMENT: 'NEW_ASSESSMENT',
+    SET_ASSESSMENT: 'SET_ASSESSMENT',
 }
 
 export default types
@@ -26,3 +27,4 @@ export const newStudentAssessment = newAssessment => ({
     type: types.NEW_ASSESSMENT,
     newAssessment
 })
+

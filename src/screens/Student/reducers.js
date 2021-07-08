@@ -3,7 +3,9 @@ import types from './actions'
 
 const initialState = {
     loading: true,
-    student: {}
+    student: {},
+    assessmentNumber:0,
+    assessments: []
 }
 
 const studentReducer = (state=initialState, action) => {
@@ -28,11 +30,17 @@ const studentReducer = (state=initialState, action) => {
         case types.NEW_ASSESSMENT:
             return {
                 ...state,
+                loading: true
+            }
+        case types.SET_ASSESSMENT:
+            return {
+                ...state,
+                loading: false,
                 student: {
                     ...state.student,
                     assessments: [
-                        // ...state.student.assessments,
-                        action.newAssessment
+                        ...state.student.assessments,
+                        action.assessment,
                     ]
                 }
             }
@@ -42,3 +50,15 @@ const studentReducer = (state=initialState, action) => {
 }
 
 export default studentReducer
+
+/*
+
+student: {
+                    ...state.student,
+                    assessments: [
+                        ...state.student.assessments,
+                        action.newAssessment
+                    ]
+                }
+*/
+ 
