@@ -5,7 +5,7 @@ import SubjectsInfo from "../../components/StudentFormInfo/SubjectsInfo";
 import { useState } from "react";
 import Title from "../../components/StudentFormInfo/Title";
 import Subjects from "../../components/StudentFormInfo/Subjects";
-import { Row } from "react-bootstrap";
+import { Button, Row } from "react-bootstrap";
 
 
 const StudentForm = ({addEntry}) => {
@@ -45,7 +45,10 @@ const StudentForm = ({addEntry}) => {
                 addSubject={addSubject} 
                 removeSubject={removeSubject} />
             )}
-            <button type="submit">go</button>
+            <div className="form__submitBtn">
+                <Button variant="dark" type="submit">Adicionar alun@</Button>
+            </div>
+            {/* <button type="submit">go</button> */}
         </form>
 
     )

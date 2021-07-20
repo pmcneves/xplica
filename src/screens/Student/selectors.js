@@ -1,0 +1,1 @@
+export const getAssessmentSlice = state => state.studentInfo.student.assessments

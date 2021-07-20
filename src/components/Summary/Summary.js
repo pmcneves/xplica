@@ -7,7 +7,7 @@ const Summary = () => {
 
     // attendance counter
     let online = 0
-    let presencial =0
+    let presencial = 0
     students.map(student => {
         if(student.info.tutoring.attendance === 'Online') {
             online += 1 
@@ -18,14 +18,10 @@ const Summary = () => {
     })
 
     return (
-        <Row  className="summary-layout__container">
+        <Row  className="summary-layout__container justify-content-center">
             <div className="col-md-4 summary-layout">
                 <h2 className="summary-layout__title">Número de alunos</h2>
                 <h4 className="summary-layout__number">{students.length > 0 ? students.length : '-'}</h4>
-            </div>
-            <div className="col-md-4 summary-layout">
-                <h2 className="summary-layout__title">Horas semanais</h2>
-                <h4 className="summary-layout__number">{students.length > 0 ? `${students.length}h` : '-'}</h4>
             </div>
             <div className="col-md-4 summary-layout">
                 <h2 className="summary-layout__title">Presencial / Online</h2>

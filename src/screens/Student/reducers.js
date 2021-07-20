@@ -3,9 +3,11 @@ import types from './actions'
 
 const initialState = {
     loading: true,
-    student: {},
+    student: {
+        assessments: []
+    },
     assessmentNumber:0,
-    assessments: []
+    
 }
 
 const studentReducer = (state=initialState, action) => {
@@ -39,9 +41,18 @@ const studentReducer = (state=initialState, action) => {
                 student: {
                     ...state.student,
                     assessments: [
-                        ...state.student.assessments,
-                        action.assessment,
+                        ...(state.student.assessments || []),
+                        action.assessment
                     ]
+                }
+            }
+        case types.DELETE_ASSESSMENT:
+            console.log('reducer', action.selectingAssessments)
+            return {
+                ...state,
+                student: {
+                    ...state.student,
+                    assessments: action.selectingAssessments
                 }
             }
         default:

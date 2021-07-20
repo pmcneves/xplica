@@ -1,7 +1,9 @@
 const SubjectNameMenu = ({subject, classes, fn}) => {
     return (
         <div className={`student__subject__label ${classes}`} onClick={fn}>
-            {subject}
+            <h6>
+                {subject}
+            </h6>
         </div>
     )
 }

@@ -1,6 +1,5 @@
 import { put, call, takeLatest, select } from '@redux-saga/core/effects'
 import { removeStudentFromDb, fetchStudentsFromDb } from '../../firebase'
-
 import types, { setStudents } from './actions'
 import { getExpSlice } from './selectors';
 

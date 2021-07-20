@@ -129,15 +129,15 @@ const TutorTable = () => {
             {students.length >= 1 ? (
                 <table {...getTableProps()} className="table table-hover table-striped table-align-right">
                 <thead>
-                {headerGroups.map(headerGroup => (
-                    <tr {...headerGroup.getHeaderGroupProps()} className="table-header">
-                        {headerGroup.headers.map(column => (
-                            <th {...column.getHeaderProps(column.getSortByToggleProps())} >
-                                    {column.render('Header')}
-                            </th>
-                        ))}
-                    </tr>
-                ))}
+                    {headerGroups.map(headerGroup => (
+                        <tr {...headerGroup.getHeaderGroupProps()} className="table-header">
+                            {headerGroup.headers.map(column => (
+                                <th {...column.getHeaderProps(column.getSortByToggleProps())} >
+                                        {column.render('Header')}
+                                </th>
+                            ))}
+                        </tr>
+                    ))}
                 </thead>
                 <tbody {...getTableBodyProps()}>
                     {rows.map(row => {

@@ -11,7 +11,12 @@ const firebaseConfig = {
   appId: "1:571632396238:web:6339aeb2b8f03c1aaced9f"
   };
 
-firebase.initializeApp(firebaseConfig)
+const app = () => !firebase.apps.length 
+? firebase.initializeApp(firebaseConfig) 
+: firebase.app()
+
+app()
+
 
 const database = firebase.database()
 const auth = firebase.auth()
@@ -20,11 +25,15 @@ export const addNewAssessment = async (newAssessment) => await database
   .ref(`students/${newAssessment.currentStudentId}/assessments/${newAssessment.assessmentId}`)
   .set(newAssessment.assessmentInfo)
 
-export const addStudentToDb = async (student) => await database
+export const deleteAssessmentFromDb = async ids => await database
+.ref(`/students/${ids.currentStudentId}/assessments/${ids.id}`)
+.remove()
+
+export const addStudentToDb = async student => await database
   .ref(`/students/${student.id}`)
   .set(student.info);
 
-export const removeStudentFromDb = async (id) => await database
+export const removeStudentFromDb = async id => await database
 .ref(`/students/${id}`)
 .remove()
 
@@ -34,12 +43,17 @@ export const fetchStudentsFromDb = async () => await database
   .then(snapshot=> {
     const students = []
     snapshot.forEach(childSnapshot => {
-      students.push({id: childSnapshot.key, info: childSnapshot.val()})
+      students.push({
+        id: childSnapshot.key, 
+        info: {
+          ...childSnapshot.val(),
+        }
+      })
     })
     return students
   })
 
-export const fetchStudentFromDb = async (id) => await database
+export const fetchStudentFromDb = async id => await database
   .ref(`students/${id}`)
   .once("value")
   .then(snapshot => {

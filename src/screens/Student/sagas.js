@@ -1,14 +1,25 @@
-import { takeLatest, call, put } from "@redux-saga/core/effects"
-import { addNewAssessment, fetchStudentFromDb } from "../../firebase"
+import { takeLatest, call, put, select } from "@redux-saga/core/effects"
+import { addNewAssessment, deleteAssessmentFromDb, fetchStudentFromDb } from "../../firebase"
 import types, { setStudent } from "./actions"
+import { getAssessmentSlice } from './selectors';
+
+function* deleteAssessment({ids}) {
+    try {
+        yield call(deleteAssessmentFromDb, ids )
+        const state = yield select(getAssessmentSlice)
+        const selectingAssessments = state.filter(assessment=>assessment.id !== ids.id)
+        console.log(selectingAssessments)        
+        yield put({type: types.DELETE_ASSESSMENT, selectingAssessments})
+    } catch(e) {
+        console.log(e)
+    }
+}
 
 function* newAssesmments({newAssessment}) {
-    console.log(newAssessment)
     const assessment = {
         ...newAssessment.assessmentInfo,
         id: newAssessment.assessmentId,
     }
-    console.log(assessment)
     try {   
         yield call(addNewAssessment, newAssessment)
         yield put({type:types.SET_ASSESSMENT, assessment})
@@ -33,4 +44,5 @@ function* getStudent({id}) {
 export default function* studentSagas() {
     yield takeLatest(types.GET_STUDENT, getStudent)
     yield takeLatest(types.NEW_ASSESSMENT, newAssesmments)
+    yield takeLatest(types.REMOVE_ASSESSMENT_SPY, deleteAssessment)
 }

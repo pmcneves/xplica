@@ -4,6 +4,8 @@ const types = {
     ACTIVE_STUDENT: 'ACTIVE_STUDENT',
     NEW_ASSESSMENT: 'NEW_ASSESSMENT',
     SET_ASSESSMENT: 'SET_ASSESSMENT',
+    REMOVE_ASSESSMENT_SPY: 'REMOVE_ASSESSMENT_SPY',
+    DELETE_ASSESSMENT: 'DELETE_ASSESSMENT'
 }
 
 export default types
@@ -26,5 +28,10 @@ export const activeStudent = id => ({
 export const newStudentAssessment = newAssessment => ({
     type: types.NEW_ASSESSMENT,
     newAssessment
+})
+
+export const deleteStudentAssessment = ids => ({
+    type: types.REMOVE_ASSESSMENT_SPY,
+    ids
 })
 

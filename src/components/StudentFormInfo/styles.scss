@@ -1,11 +1,13 @@
 .student-info__title{
-    margin: 30px 0 15px 0;
+    margin: 30px 0 0 0;
     font-style: italic;
 }
 
 .form-label {
    color: #266150;
    font-weight: bold;
+   margin-bottom: 3px;
+   margin-top: 10px
 }
 
 .deletesubject {
@@ -25,3 +27,42 @@
         border: none;
     }
 }
+
+.form__subjects {
+    background-color: white;
+    border: 1px solid black;
+    border-radius:20px;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.form__subjects__rows {
+    padding: 1.5rem;
+    padding-bottom: 1rem;
+}
+
+.form__submitBtn {
+    display: grid
+}
+
+
+@media (min-width: 767px) {
+    .form-label {
+        margin-top: 15px;
+    }
+    .form__subjects {
+        background-color: inherit;
+        border: none;
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+    .form__subjects__rows {
+        padding: 0;
+    }
+    .form__submitBtn {
+        display: block;
+        margin-top: 1rem;
+    }
+
+} 
+
