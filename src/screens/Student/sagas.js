@@ -7,8 +7,7 @@ function* deleteAssessment({ids}) {
     try {
         yield call(deleteAssessmentFromDb, ids )
         const state = yield select(getAssessmentSlice)
-        const selectingAssessments = state.filter(assessment=>assessment.id !== ids.id)
-        console.log(selectingAssessments)        
+        const selectingAssessments = state.filter(assessment=>assessment.id !== ids.id)       
         yield put({type: types.DELETE_ASSESSMENT, selectingAssessments})
     } catch(e) {
         console.log(e)

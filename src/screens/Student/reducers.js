@@ -47,7 +47,6 @@ const studentReducer = (state=initialState, action) => {
                 }
             }
         case types.DELETE_ASSESSMENT:
-            console.log('reducer', action.selectingAssessments)
             return {
                 ...state,
                 student: {

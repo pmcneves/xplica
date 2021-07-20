@@ -11,6 +11,7 @@ const NewStudent = () => {
 
     //add student to db
     const addEntry = (data) => {
+        console.log(data)
         dispatch(submitStudent({
             id: uuidv4(),
             info: {
@@ -29,7 +30,7 @@ const NewStudent = () => {
 
     return (
         <Container>
-            <StudentForm addEntry={addEntry}/>
+            <StudentForm submitEntry={addEntry}/>
         </Container>
     )
 }

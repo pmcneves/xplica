@@ -30,7 +30,7 @@ const Student = (props) => {
                     <studentInfo.Provider value={info}>
                         <Row>
                             <Col className="mb-4">
-                                <StudentCard />
+                                <StudentCard activeStudentId={props.match.params.id}/>
                             </Col>
                         </Row>
                         <Row>

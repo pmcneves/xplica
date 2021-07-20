@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import { studentInfo } from "../../../screens/Student"
 import { Container, Row, Col, Button } from "react-bootstrap"
 import { useState } from 'react'
@@ -11,6 +11,7 @@ import Topic from "../../../components/Student/Subjects/Topic"
 import DeleteAssessmentModal from "../../../components/Student/DeleteAssessmentModal"
 
 
+
 const GradesCard = () => {
     const studentData = useContext(studentInfo)
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -19,17 +20,23 @@ const GradesCard = () => {
     const currentStudentId = useSelector(state=>state.studentInfo.studentId)
 
 
+    /////////// STATES
+
+    //id to remove on delete assessment
+    const [idToRemove, setIdToRemove] = useState()
+
     //default state to populate modals data
     const [defaultAssessmentGrade, setDefaultAssessmentGrade] = useState('')
     const [defaultAssessmentGradeType, setDefaultAssessmentGradeType] = useState('')
     const [defaultDate, setDefaultDate] = useState()
     const [defaultSubject, setDefaultSubject] = useState('')
     const [defaultType, setDefaultType] = useState('')
+    const [textForUpdate, setTextForUpdate] = useState(false)
 
     //always shows the first subject, unless clicked on another
     const [topicShown, setTopicShown] = useState(studentData.tutoring.subjects[0])
-    const [assessmentsShown, setAssessmentsShown] = useState([])
-    const [hasAssessments, setHasAssessments] = useState(false)
+    // const [assessmentsShown, setAssessmentsShown] = useState([])
+    // const [hasAssessments, setHasAssessments] = useState(false)
 
     //subject change
     const subjectChange = topic => {
@@ -37,17 +44,21 @@ const GradesCard = () => {
     }
 
     // assessments per subject  --- NEEDS IMPROVEMENT
-    let assessmentsArr = []
-    useEffect(()=> {
-        if(studentData.assessments){
-            for (let i = 0; i<studentData.assessments.length; i++) {
-                if(studentData.assessments[i].subject === topicShown.subject) {
-                    assessmentsArr.push(studentData.assessments[i])
-                } 
-        }} 
-        setAssessmentsShown(assessmentsArr)
-    }, [topicShown])
+    // let assessmentsArr = []
+    // useEffect(()=> {
+    //     if(studentData.assessments){
+    //         for (let i = 0; i<studentData.assessments.length; i++) {
+    //             if(studentData.assessments[i].subject === topicShown.subject) {
+    //                 assessmentsArr.push(studentData.assessments[i])
+    //             } 
+    //     }} 
+    //     setAssessmentsShown(assessmentsArr)
+    // }, [topicShown])
 
+
+
+
+    /////////// MODALS
 
     //add grade modal handler
     const handleModalOpen = () => {
@@ -63,18 +74,29 @@ const GradesCard = () => {
     const handlerEditGradeModal = id => {
         handleModalOpen();
         let assessmentToUpdate
-        const assessmentsList = studentData.assessments.map(assessment=> {
-            if(assessment.id === id) {
-                assessmentToUpdate = assessment
-            }
+        studentData.assessments.map(assessment=> {
+            if(assessment.id === id) assessmentToUpdate = assessment
         })
-        console.log(assessmentToUpdate)
         setDefaultAssessmentGrade(assessmentToUpdate.assessmentGrade)
         setDefaultAssessmentGradeType(assessmentToUpdate.assessmentGradeType)
         setDefaultDate(assessmentToUpdate.date)
         setDefaultSubject(assessmentToUpdate.subject)
-        setDefaultType(assessmentToUpdate.type)        
+        setDefaultType(assessmentToUpdate.type)
+        setTextForUpdate(true)      
     }
+
+    // delete grade modal handler
+    const handleDeleteAssessmentModalOpen = id => {
+        setIsDeleteAssessmentModalOpen(true)
+        setIdToRemove(id)
+    }
+
+    const handleDeleteAssessmentModalClose= () => {
+        setIsDeleteAssessmentModalOpen(false)
+        setIdToRemove()
+    }
+
+
 
     //reset state
     const resetDefaults = () => {
@@ -82,17 +104,15 @@ const GradesCard = () => {
         setDefaultAssessmentGradeType('')
         setDefaultDate('')
         setDefaultSubject('')
-        setDefaultType('')   
+        setDefaultType('')
+        setTextForUpdate(false)   
     }
 
-    //delete grade modal handler
-    const handleDeleteAssessmentModalOpen = () => {
-        setIsDeleteAssessmentModalOpen(true)
-    }
 
-    const handleDeleteAssessmentModalClose= () => {
-        setIsDeleteAssessmentModalOpen(false)
-    }
+
+
+
+    /////////// MANAGE ASSESSMENTS
 
     //add assessment
     const addNewAssessment = data => {
@@ -109,6 +129,12 @@ const GradesCard = () => {
         dispatch(newStudentAssessment(transformedData))
     }
 
+    // edit assessment
+    const editAssessment = () => {
+        handleModalClose();
+        console.log('updated')
+    }
+
     //delete assessment
     const deleteAssessment =  id => {
         const ids = {
@@ -116,6 +142,7 @@ const GradesCard = () => {
             id,
         }
         dispatch(deleteStudentAssessment(ids))
+        handleDeleteAssessmentModalClose()
     }
 
     return (
@@ -141,7 +168,8 @@ const GradesCard = () => {
                         selectedSubject={topicShown} 
                         assessments={studentData.assessments} 
                         deleteAssessment={deleteAssessment}
-                        handlerEditGradeModal={handlerEditGradeModal}/>
+                        handlerEditGradeModal={handlerEditGradeModal}
+                        handleDeleteAssessmentModalOpen={handleDeleteAssessmentModalOpen}/>
                 </Col>
             </Row>
             <Row>
@@ -167,8 +195,15 @@ const GradesCard = () => {
                 defaultDate={defaultDate}
                 defaultSubject={defaultSubject}
                 defaultType={defaultType}
+                textForUpdate={textForUpdate}
+                editAssessment={editAssessment}
             />
-            {/* <DeleteAssessmentModal isDeleteAssessmentModalOpen={isDeleteAssessmentModalOpen} handleDeleteAssessmentModalClose={handleDeleteAssessmentModalClose}/> */}
+            <DeleteAssessmentModal 
+                isDeleteAssessmentModalOpen={isDeleteAssessmentModalOpen} 
+                handleDeleteAssessmentModalClose={handleDeleteAssessmentModalClose}
+                deleteAssessment={deleteAssessment}
+                idToRemove={idToRemove}
+            />
         </Container>
     )
 }

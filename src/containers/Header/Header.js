@@ -1,7 +1,7 @@
 import './styles.scss'
 import FontAwesomeIcons from '../../components/Buttons/FontAwesomeIcons'
 import { faCog } from '@fortawesome/free-solid-svg-icons'
-import { Nav, Navbar, NavbarBrand, NavDropdown } from 'react-bootstrap'
+import { Nav, Navbar, NavbarBrand, NavDropdown, Container } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { useDispatch } from 'react-redux'
 import { logOut } from '../../screens/Login/actions'
@@ -14,30 +14,30 @@ const Header = () => {
 
     return (
         <header>
-            <Navbar bg="dark" variant="dark">
-                <div className="container">
+            <Navbar collapseOnSelect expand='sm' bg="dark" variant="dark">
+                <Container>
                     <NavbarBrand>
                         <h2 className="navbar__logo">Xplica</h2>
                     </NavbarBrand>
-                    <div>
-                        <ul className="navbar-nav">
-                            <LinkContainer to="/adicionaralun@">
-                                <Nav.Link> Adicionar alun@ </Nav.Link>
-                            </LinkContainer>
-                            <LinkContainer to="/alun@s">
-                                <Nav.Link> Alun@s </Nav.Link>
-                            </LinkContainer>
-                            <NavDropdown title={<FontAwesomeIcons icon={faCog} classes={"btn-cog"}/>} id="basic-nav-dropdown">
-                                <NavDropdown.Item href="/profile">Perfil</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item onClick={logout}>Terminar sessão</NavDropdown.Item>
-                            </NavDropdown>
-                        </ul>
-                        
-                        
-                        
-                    </div>
-                </div>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse>
+                        <div>
+                            <ul className="navbar-nav">
+                                <LinkContainer to="/adicionaralun@">
+                                    <Nav.Link> Adicionar alun@ </Nav.Link>
+                                </LinkContainer>
+                                <LinkContainer to="/alun@s">
+                                    <Nav.Link> Alun@s </Nav.Link>
+                                </LinkContainer>
+                                <Nav.Link onClick={logout}> Terminar sessão </Nav.Link>
+                            </ul>
+                            
+                            
+                            
+                        </div>
+
+                    </Navbar.Collapse>
+                </Container>
             </Navbar>
         </header>
     )

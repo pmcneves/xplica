@@ -2,6 +2,7 @@ import { createBrowserHistory } from 'history';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import ExplicadorMenu from '../screens/Explicador';
 import NewStudent from '../screens/NewStudent';
+import EditStudent from '../screens/EditStudent';
 import Student from '../screens/Student';
 import Error from '../screens/Error'
 import Login from '../screens/Login'
@@ -20,8 +21,9 @@ const AppRouter = () => {
                 <PrivateRoute path="/alun@s" component={ExplicadorMenu}/>
                 <PrivateRoute path="/adicionaralun@" component={NewStudent}/>
                 <PrivateRoute path="/profile" component={Profile}/>
+                <PrivateRoute path="/alun@/:id/editar" component={EditStudent}/>
                 <PrivateRoute path="/alun@/:id" component={Student}/>
-                <PrivateRoute component={Error}/>) 
+                <PrivateRoute component={Error}/>
             </Switch>        
         </BrowserRouter>
     )

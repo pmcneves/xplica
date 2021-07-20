@@ -1,21 +1,22 @@
 import "react-datepicker/dist/react-datepicker.css"
-import { Modal, Button, Row, Col, Form } from "react-bootstrap"
+import { Modal, Button, Row, Col } from "react-bootstrap"
 import DatePicker, { registerLocale } from "react-datepicker"
 import { useForm, Controller } from "react-hook-form"
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import pt from 'date-fns/locale/pt'
-import moment from 'moment'
 
 const GradesModal = ({
     isModalOpen, 
     handleModalClose, 
     studentData, 
     addNewAssessment,
+    editAssessment,
     defaultAssessmentGrade,
     defaultAssessmentGradeType,
     defaultDate,
     defaultSubject,
     defaultType,
+    textForUpdate,
 }) => {
    
     const { register, handleSubmit, control, reset } = useForm();
@@ -48,7 +49,12 @@ const GradesModal = ({
             centered
             animation={false}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Adicionar avaliação</Modal.Title>
+                    {textForUpdate ? (
+                        <Modal.Title>Editar avaliação</Modal.Title>
+                    ) : (
+                        <Modal.Title>Adicionar avaliação</Modal.Title>
+                    )}
+                    
                 </Modal.Header>
                     <form onSubmit={handleSubmit(addNewAssessment)}>
                         <Modal.Body>
@@ -74,14 +80,12 @@ const GradesModal = ({
                                         name={`date`}
                                         rules={{required: true}}
                                         render = {({field}) => {
-                                            const date = moment(field.value)
-                                            console.log(moment(field.value))
                                             return (
                                                 <div className="customDatePickerWidth">
                                                     <DatePicker
                                                         className="form-control"
                                                         placeholderText = 'Data'
-                                                        // dateFormat='dd/MM/yyyy'
+                                                        dateFormat='dd/MM/yyyy'
                                                         isClearable
                                                         locale="pt" 
                                                         selected={Date.parse(field.value)}
@@ -131,9 +135,15 @@ const GradesModal = ({
                         <Button variant="secondary" onClick={handleModalClose}>
                             Fechar
                         </Button>
-                        <Button variant="primary" type="submit">
-                            Adicionar
-                        </Button>
+                        {textForUpdate ? (
+                            <Button variant="primary" onClick={()=>editAssessment()}>
+                                Atualizar
+                            </Button>
+                        ) : (
+                            <Button variant="primary" type="submit">
+                                Adicionar
+                            </Button>
+                        )}
                     </Modal.Footer>
                 </form>
         </Modal>

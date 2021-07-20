@@ -1,15 +1,17 @@
 import { Container, Row, Col } from "react-bootstrap"
-import { useMemo, useState } from "react"
+import { useMemo } from "react"
 import { useTable } from 'react-table'
 import TableButtons from "../../Buttons/TableButtons"
-import { faTrashAlt, faEye } from "@fortawesome/free-solid-svg-icons"
+import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons"
 
 
 const Topic = ({
     selectedSubject, 
     assessments, 
     deleteAssessment, 
-    handlerEditGradeModal}) => {
+    handlerEditGradeModal,
+    handleDeleteAssessmentModalOpen
+}) => {
 
 
     const columns = useMemo(
@@ -17,11 +19,11 @@ const Topic = ({
           {
             Header: 'Data',
             accessor: 'date',
-            // Cell: (({value}) => {
-            //     const dateArr = value.split('/')
-            //     dateArr.pop()
-            //     return dateArr.toString().replace(',', '/');
-            // })
+            Cell: (({value}) => {
+                const dateArr = value.split('/')
+                dateArr.pop()
+                return dateArr.toString().replace(',', '/');
+            })
           },
           {
             Header: 'Tipo',
@@ -38,8 +40,8 @@ const Topic = ({
             Cell: ({row}) => {
                 return (
                     <div>
-                        <TableButtons icon={faEye} fn={() => handlerEditGradeModal(row.original.id)}/>
-                        <TableButtons icon={faTrashAlt} fn={() => deleteAssessment(row.original.id)}/>
+                        <TableButtons icon={faEdit} fn={() => handlerEditGradeModal(row.original.id)}/>
+                        <TableButtons icon={faTrashAlt} fn={() => handleDeleteAssessmentModalOpen(row.original.id)}/>
                     </div>)}
           },
         ],
@@ -63,26 +65,28 @@ const Topic = ({
 
     return (
         <Container>
-            <Row>
-                <Col className="mb-2">
-                    <label className="student__label">Regime</label>
-                    <p className="student__text">{selectedSubject.attendance}</p>
-                </Col>
-                <Col className="mb-2">
-                    <label className="student__label">Condições</label>
-                    <p className="student__text">{selectedSubject.conditions}</p>
-                </Col>
-            </Row>
-            <Row>
-                <Col className="mb-2">
-                    <label className="student__label">h/sem.</label>
-                    <p className="student__text">{selectedSubject.durationPerWeek}</p>
-                </Col>
-                <Col className="mb-2">
-                    <label className="student__label">Professor</label>
-                    <p className="student__text">{selectedSubject.teacherOfselectedSubject}</p>
-                </Col>
-            </Row>
+            <div className="text-center">
+                <Row>
+                    <Col className="mb-2">
+                        <label className="student__label">Regime</label>
+                        <p className="student__text">{selectedSubject.attendance}</p>
+                    </Col>
+                    <Col className="mb-2">
+                        <label className="student__label">Condições</label>
+                        <p className="student__text">{selectedSubject.conditions}</p>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col className="mb-2">
+                        <label className="student__label">h/sem.</label>
+                        <p className="student__text">{selectedSubject.durationPerWeek}</p>
+                    </Col>
+                    <Col className="mb-2">
+                        <label className="student__label">Professor</label>
+                        <p className="student__text">{selectedSubject.teacherOfselectedSubject}</p>
+                    </Col>
+                </Row>
+            </div>
             {assessments ? (
                 <table {...getTableProps()} className="table table-hover table-striped mt-3">
                     <thead>
